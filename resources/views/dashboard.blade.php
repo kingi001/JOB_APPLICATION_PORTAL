@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <!-- Active Applications -->
             <div
-                class="p-5 bg-blue-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
+                class="p-8 bg-blue-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
                 <i class="fas fa-check-circle text-blue-600 text-3xl"></i>
                 <div class="space-y-1">
                     <h3 class="font-semibold text-blue-900 text-lg">Active Applications</h3>
@@ -29,7 +29,7 @@
             </div>
             <!-- Jobs Applied -->
             <div
-                class="p-5 bg-green-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
+                class="p-8 bg-green-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
                 <i class="fas fa-clipboard-check text-green-600 text-3xl"></i>
                 <div class="space-y-1">
                     <h3 class="font-semibold text-green-900 text-lg">Jobs Applied</h3>
@@ -40,7 +40,7 @@
             </div>
             <!-- Application Status -->
             <div
-                class="p-5 bg-yellow-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
+                class="p-8 bg-yellow-100 rounded-lg shadow-md flex items-start gap-4 hover:scale-105 hover:shadow-lg transition-transform">
                 <i class="fas fa-paper-plane text-yellow-600 text-3xl"></i>
                 <div class="space-y-1">
                     <h3 class="font-semibold text-yellow-900 text-lg">Application Status</h3>
