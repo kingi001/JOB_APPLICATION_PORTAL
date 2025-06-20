@@ -22,11 +22,11 @@
         </a>
 
         <flux:navbar class="-mb-px max-lg:hidden">
-            <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+            <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request() - > routeIs('dashboard')"
                 wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navbar.item>
-            <flux:navbar.item icon="layout-grid" :href="route('notes')" :current="request()->routeIs('notes')"
+            <flux:navbar.item icon="layout-grid" :href="route('notes')" :current="request() - > routeIs('notes')"
                 wire:navigate>
                 {{ __('Notes') }}
             </flux:navbar.item>
@@ -107,8 +107,8 @@
                     :current="request() - > routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="layout-grid" :href="route('notes')"
-                    :current="request() - > routeIs('notes')" wire:navigate>
+                <flux:navlist.item icon="layout-grid" :href="route('notes')" :current="request() - > routeIs('notes')"
+                    wire:navigate>
                     {{ __('Notes') }}
                 </flux:navlist.item>
             </flux:navlist.group>
@@ -131,8 +131,11 @@
 
     {{ $slot }}
 
+
     @fluxScripts
     @include('sweetalert::alert')
+
+
 
 </body>
 

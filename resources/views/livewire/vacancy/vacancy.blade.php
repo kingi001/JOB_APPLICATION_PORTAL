@@ -93,7 +93,7 @@
             x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
             x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 translate-y-2" x-init="setTimeout(() => show = false, 4000)"
-            class="fixed top-6 right-6 w-full max-w-sm bg-white border-l-4 border-red-500 text-red-800 p-3 rounded-lg shadow-lg flex items-start space-x-3 z-50"
+            class="fixed top-6 right-6 w-full max-w-sm bg-white border-l-4 border-red-500 text-red-800 p-3 rounded-md shadow-md flex items-start space-x-3 z-50"
             role="alert">
             <svg class="w-6 h-6 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -152,24 +152,25 @@
                                                 d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
                                         </svg>
                                     </span>
-
-                                    <!-- Input -->
-                                    <input wire:model.live.debounce.200ms="search" type="text" id="search"
-                                        placeholder="Enter keyword (e.g., refno, position, etc.)"
-                                        class="w-full rounded-xl border border-gray-300 bg-white py-1 pl-10 pr-4 text-sm placeholder-gray-400 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                                    <flux:input
+                                    type="text"
+                                    name="search"
+                                    wire:model.live.debounce.200ms="search"
+                                    id="search"
+                                    placeholder="Enter keyword (refno, position,duties,responsibilities etc.)"
+                                    class="w-full text-sm" />
                                 </div>
                             </div>
                             <!-- Status Filter -->
-                            <!-- Status Filter -->
                             <div>
                                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                <select wire:model.live.debounce.200ms="status" id="status"
+                                <flux:select wire:model.live.debounce.200ms="status" id="status"
                                     class="w-full text-sm border border-gray-300 rounded-xl shadow-sm bg-white py-1 px-4 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
                                     <option value="">-- Select Status --</option>
                                     <option value="open">Open</option>
                                     <option value="closed">Closed</option>
                                     <option value="deleted">Deleted</option>
-                                </select>
+                                </flux:select>
                             </div>
                         </div>
                     </div>

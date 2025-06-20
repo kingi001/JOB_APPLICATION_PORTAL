@@ -5,8 +5,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
-
-
     @include('partials.head')
 </head>
 
@@ -51,6 +49,7 @@
         </div>
     </div>
     @fluxScripts
+
 
 
 </body>
