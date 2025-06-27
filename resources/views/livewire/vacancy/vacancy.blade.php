@@ -114,12 +114,20 @@
     <div class="relative py-4  mx-auto w-full sm:px-6 lg:px-8">
         <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
             <!-- Page Heading -->
-            <div class="flex items-center justify-between mb-1 pb-1 border-b border-gray-200">
-                <h3 class="text-base font-semibold text-indigo-700 flex items-center gap-2">
-                    <i class="fas fa-briefcase text-blue-600 text-xl"></i>
-                    {{ __('Vacancies') }}
-                    <p class="text-sm text-gray-300">....Manage job vacancies</p>
-                </h3>
+            <div class="flex items-start justify-between mb-4 pb-4 border-b border-gray-200">
+                <div>
+                    <h3 class="text-lg font-bold text-indigo-800 flex items-center gap-3">
+                        <i class="fas fa-briefcase text-blue-600 text-lg"></i>
+                        {{ __('Job Vacancies') }}
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-1">
+                        Explore, manage, and publish open positions. Easily track job applications, deadlines, and
+                        candidate status.
+                    </p>
+                    <p class="text-sm text-gray-400 mt-1 italic">
+                        Use this section to keep your listings up-to-date and provide applicants with clear information.
+                    </p>
+                </div>
             </div>
             <!-- Search Section -->
             <div x-data="{ showForm: false }" class="w-full">
@@ -152,13 +160,10 @@
                                                 d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
                                         </svg>
                                     </span>
-                                    <flux:input
-                                    type="text"
-                                    name="search"
-                                    wire:model.live.debounce.200ms="search"
-                                    id="search"
-                                    placeholder="Enter keyword (refno, position,duties,responsibilities etc.)"
-                                    class="w-full text-sm" />
+                                    <flux:input type="text" name="search" wire:model.live.debounce.200ms="search"
+                                        id="search"
+                                        placeholder="Enter keyword (refno, position,duties,responsibilities etc.)"
+                                        class="w-full text-sm" />
                                 </div>
                             </div>
                             <!-- Status Filter -->
