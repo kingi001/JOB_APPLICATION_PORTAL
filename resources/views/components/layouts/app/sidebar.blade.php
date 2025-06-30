@@ -18,15 +18,12 @@
             <flux:navlist variant="outline">
 
                 <flux:navlist.group :heading="__('E-recruitment')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                       {{ __('Applicant Dashboard') }}
+                    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                       <i class="fas fa-home text-gray-700 text-sm mr-3"></i>{{ __('Applicant Dashboard') }}
                     </flux:navlist.item>
                     {{-- <flux:navlist.item :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>
                         <i class="fas fa-home text-gray-700 text-sm mr-3"></i>{{ __('Notes') }}
                     </flux:navlist.item> --}}
-                    <flux:navlist.item :href="route('personal-information')" :current="request()->routeIs('personal-information')" wire:navigate>
-                        <i class="fas fa-user text-gray-700 text-sm mr-3"></i>{{ __('Personal Information') }}
-                    </flux:navlist.item>
 
                     <flux:navlist.item :href="route('vacancies')" :current="request()->routeIs('vacancies')" wire:navigate>
                         <i class="fas fa-briefcase text-gray-700 text-sm mr-3"></i>{{ __('Vacancies') }}
@@ -50,7 +47,7 @@
 
                 </flux:navlist.group>
                      <flux:navlist.group :heading="__('Personal Profile')" class="grid">
-                        <flux:navlist.item :href="route('personal-details.show')" :current="request()->routeIs('personal-details.show')" wire:navigate>
+                        <flux:navlist.item :href="route('personal-information')" :current="request()->routeIs('personal-information')" wire:navigate>
                         <i class="fas fa-user text-gray-700 text-sm mr-3"></i>{{ __('Personal Information') }}
                     </flux:navlist.item>
 
