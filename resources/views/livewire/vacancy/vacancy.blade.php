@@ -12,7 +12,7 @@
     </div>
     <flux:separator variant="subtle" />
     {{-- Bread Crumbs --}}
-    <div class="bg-gray-100 dark:bg-gray-800 py-0.5 pl-8"> <!-- Reduced py-2 to py-1 -->
+    <div class="bg-gray-100 dark:bg-gray-800 py-0.5"> <!-- Reduced py-2 to py-1 -->
         <div class="mx-auto flex items-center text-xs text-gray-600 dark:text-gray-400">
             <!-- Reduced text-sm to text-xs -->
             <nav class="flex px-6 py-1 text-blue-700 border border-blue-200 rounded-lg bg-blue-50 dark:bg-blue-800 dark:border-blue-700"
@@ -111,24 +111,19 @@
     @endif
     <livewire:vacancy.create-vacancy />
     <livewire:vacancy.edit-vacancy />
-    <div class="relative py-4  mx-auto w-full sm:px-6 lg:px-8">
-        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+    <div class="py-1 mt-2 container  mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-md bg-white ">
+        <div class="p-2 bg-white border-b border-gray-200 rounded-lg">
             <!-- Page Heading -->
-            <div class="flex items-start justify-between mb-4 pb-4 border-b border-gray-200">
-                <div>
-                    <h3 class="text-lg font-bold text-indigo-800 flex items-center gap-3">
-                        <i class="fas fa-briefcase text-blue-600 text-lg"></i>
-                        {{ __('Job Vacancies') }}
-                    </h3>
-                    <p class="text-sm text-gray-500 mt-1">
-                        Explore, manage, and publish open positions. Easily track job applications, deadlines, and
-                        candidate status.
-                    </p>
-                    <p class="text-sm text-gray-400 mt-1 italic">
-                        Use this section to keep your listings up-to-date and provide applicants with clear information.
-                    </p>
-                </div>
-            </div>
+            <h3 class="text-lg font-bold text-indigo-800 flex items-center gap-3">
+                <i class="fas fa-briefcase text-blue-600 text-lg"></i>
+                {{ __('Job Vacancies') }}
+            </h3>
+            <p class="text-sm text-gray-500 mt-1">
+                Explore, manage, and publish open positions. Easily track job applications, deadlines, and
+                candidate status.
+            </p>
+
+            <flux:separator variant="subtle" />
             <!-- Search Section -->
             <div x-data="{ showForm: false }" class="w-full">
                 <div class="flex justify-end mt-1">
@@ -202,8 +197,7 @@
                                 <tr>
                                     <th class="text-left px-4 py-3">#</th>
                                     <th class="text-left px-4 py-3">
-                                        <input type="checkbox"
-                                            class="form-checkbox rounded-sm h-3 w-3 text-indigo-600"
+                                        <input type="checkbox" class="form-checkbox rounded-sm h-3 w-3 text-indigo-600"
                                             id="selectAllCheckbox">
                                     </th>
                                     <th class="text-left px-4 py-3">Ref No</th>
@@ -243,9 +237,8 @@
                                             @endphp
                                             <span
                                                 class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full border
-                                            {{ $isOpen ? 'text-green-800 hover:bg-green-400 bg-green-200 border-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
-                                                <i
-                                                    class="fas {{ $isOpen ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
+                                                    {{ $isOpen ? 'text-green-800 hover:bg-green-400 bg-green-200 border-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
+                                                <i class="fas {{ $isOpen ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                                 {{ ucfirst($vacancy->status) }}
                                             </span>
                                         </td>
@@ -387,9 +380,8 @@
                         </flux:button>
                     </flux:modal.close>
 
-                    <flux:button type="submit" variant="danger" wire:click="bulkDelete"
-                        wire:loading.attr="disabled" wire:target="bulkDelete"
-                        class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
+                    <flux:button type="submit" variant="danger" wire:click="bulkDelete" wire:loading.attr="disabled"
+                        wire:target="bulkDelete" class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
                         <span wire:loading.remove wire:target="bulkDelete">Delete Selected</span>
                         <span wire:loading wire:target="bulkDelete">Deleting...</span>
                     </flux:button>
@@ -440,12 +432,12 @@
                 }
             }
             // Select All functionality
-            document.getElementById('selectAllCheckbox').addEventListener('change', function() {
+            document.getElementById('selectAllCheckbox').addEventListener('change', function () {
                 document.querySelectorAll('.vacancy-checkbox').forEach(cb => cb.checked = this.checked);
             });
 
             document.querySelectorAll('.vacancy-checkbox').forEach(cb => {
-                cb.addEventListener('change', function() {
+                cb.addEventListener('change', function () {
                     const all = document.querySelectorAll('.vacancy-checkbox');
                     const allChecked = Array.from(all).every(cb => cb.checked);
                     document.getElementById('selectAllCheckbox').checked = allChecked;

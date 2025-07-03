@@ -54,7 +54,7 @@
                     </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Education')" class="grid">
-                    <flux:navlist.item :href="route('education.index')" :current="request()->routeIs('education.index')" wire:navigate>
+                    <flux:navlist.item :href="route('education')" :current="request()->routeIs('education')" wire:navigate>
                         <i class="fas fa-graduation-cap text-gray-700 text-sm mr-3"></i>{{ __('Academic Qualifications') }}
                     </flux:navlist.item>
 

@@ -86,20 +86,21 @@
                         <div
                             class="text-center py-6 px-4 bg-gray-50 border border-dashed border-gray-300 rounded-lg shadow-sm">
                             <div class="flex justify-center mb-3">
-                                <i class="fas fa-briefcase-slash text-5xl text-gray-400"></i>
+                                <i class="fas fa-briefcase text-2xl text-gray-400"></i>
                             </div>
                             <h3 class="text-base font-semibold text-gray-700">
-                                <i class="fas fa-circle-info mr-1"></i> No Vacancies Available
+                                <i class="fas fa-circle-info text-indigo-500 mr-1"></i> No Vacancies Available
                             </h3>
                             <p class="text-sm text-gray-500 mt-2">
-                                There are currently no open positions. Please check back later or follow us for updates.
+                                <i class="fas fa-bell text-xs text-gray-400 mr-1"></i>
+                                There are currently no open positions at this time. Please check back later or follow us on
+                                our official website and media to stay updated on future opportunities.
                             </p>
                         </div>
                     @else
                         <div class="rounded-lg overflow-hidden shadow border border-gray-200">
                             <table class="min-w-full divide-y divide-gray-200 text-sm">
-                                <thead
-                                    class="bg-indigo-50 text-indigo-800 uppercase text-xs font-semibold tracking-wider">
+                                <thead class="bg-indigo-50 text-indigo-800 uppercase text-xs font-semibold tracking-wider">
                                     <tr>
                                         <th class="text-left px-4 py-3">#</th>
                                         <th class="text-left px-4 py-3">Ref No</th>
@@ -131,9 +132,8 @@
                                                 @endphp
                                                 <span
                                                     class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full border
-                                    {{ $isOpen ? 'text-green-800 bg-green-200 border-green-300 hover:bg-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
-                                                    <i
-                                                        class="fas {{ $isOpen ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
+                                                                    {{ $isOpen ? 'text-green-800 bg-green-200 border-green-300 hover:bg-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
+                                                    <i class="fas {{ $isOpen ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                                     {{ ucfirst($vacancy->status) }}
                                                 </span>
                                             </td>
@@ -183,7 +183,7 @@
                                     <h3 class="font-bold text-blue-800">{{ $vacancy->position }}</h3>
                                     <span
                                         class="text-xs px-2 py-1 rounded-full border
-                        {{ strtolower($vacancy->status) === 'open' ? 'text-green-700 bg-green-100 border-green-300' : 'text-red-700 bg-red-100 border-red-300' }}">
+                                                        {{ strtolower($vacancy->status) === 'open' ? 'text-green-700 bg-green-100 border-green-300' : 'text-red-700 bg-red-100 border-red-300' }}">
                                         <i
                                             class="fas {{ strtolower($vacancy->status) === 'open' ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                         {{ ucfirst($vacancy->status) }}
@@ -202,8 +202,7 @@
                                     @if ($vacancy->status === 'open')
                                         <form action=" " method="POST">
                                             @csrf
-                                            <input type="hidden" name="cover_letter"
-                                                value="I'm interested in this role.">
+                                            <input type="hidden" name="cover_letter" value="I'm interested in this role.">
                                             <button type="submit"
                                                 class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg hover:from-blue-700 hover:to-blue-900 transition">
                                                 <i class="fas fa-paper-plane"></i> Apply
@@ -233,15 +232,16 @@
                 </div>
                 <div class="overflow-x-auto hidden md:block mt-1">
                     <div
-                        class="text-center py-4 px-4 bg-gray-50 border border-dashed border-gray-300 rounded-lg shadow-sm">
+                        class="text-center py-6 px-4 bg-gray-50 border border-dashed border-gray-300 rounded-lg shadow-sm">
                         <div class="flex justify-center mb-3">
-                            <i class="fas fa-briefcase-slash text-1xl text-gray-400"></i>
+                            <i class="	fas fa-paper-plane text-2xl text-gray-400"></i>
                         </div>
-                        <h3 class="text-base font-semibold text-gray-700"><i class="fas fa-circle-info mr-1"></i>You
-                            haven’t submitted any job
-                            applications yet.</h3>
+                        <h3 class="text-base font-semibold text-gray-700">
+                            <i class="fas fa-circle-info text-indigo-500 mr-1"></i>
+                            You haven’t submitted any job applications yet.
+                        </h3>
                         <p class="text-sm text-gray-500 mt-2">
-                            Your job applications will be displayed here.
+                            Once you apply for a position, your job application history will appear here.
                         </p>
                     </div>
                 </div>
@@ -258,16 +258,21 @@
                 </div>
                 <div class="overflow-x-auto hidden md:block mt-1">
                     <div
-                        class="text-center py-4 px-4 bg-gray-50 border border-dashed border-gray-300 rounded-lg shadow-sm">
+                        class="text-center py-6 px-4 bg-gray-50 border border-dashed border-gray-300 rounded-lg shadow-sm">
+                        <!-- Main Icon -->
                         <div class="flex justify-center mb-3">
-                            <i class="fas fa-briefcase-slash text-1xl text-gray-400"></i>
+                            <i class="fas fa-chart-bar text-2xl text-gray-400"></i>
                         </div>
-                        <h3 class="text-base font-semibold text-gray-700"><i class="fas fa-circle-info"></i>You
-                            haven’t
-                            submitted any job
-                            applications yet.</h3>
+
+                        <!-- Heading -->
+                        <h3 class="text-base font-semibold text-gray-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-circle-info text-indigo-500"></i>
+                            You haven’t submitted any job applications yet.
+                        </h3>
+
+                        <!-- Description -->
                         <p class="text-sm text-gray-500 mt-2">
-                            Your application status will be displayed here.
+                            Once you apply for a job, your application progress and status will appear here.
                         </p>
                     </div>
 

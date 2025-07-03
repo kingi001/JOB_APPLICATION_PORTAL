@@ -24,7 +24,7 @@
                 </li>
                 <li class="flex items-center gap-2 text-blue-600 dark:text-blue-300 uppercase font-semibold">
                     <i class="fa fa-user text-sm" aria-hidden="true"></i>
-                    <span title="Currently logged in user">Logged in: {{ Auth::user()->name }}</span>
+                    <span title="Currently logged in user">Signed In: {{ Auth::user()->name }}</span>
                 </li>
             </ul>
         </div>

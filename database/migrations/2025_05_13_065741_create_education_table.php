@@ -21,12 +21,11 @@ return new class extends Migration
             $table->string('award');
             $table->string('academic_document')->nullable();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -73,7 +73,7 @@
                 <i class="fas fa-user text-blue-500 text-lg"></i>
                 {{ __('Section 1 :') }}
                 {{ __('Personal Information') }}
-            </h2>
+            </h2
 
             <p class="mt-1 text-sm text-gray-600">
                 {{ __('Please provide your personal information with accuracy.') }}
