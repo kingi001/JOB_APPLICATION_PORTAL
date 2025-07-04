@@ -69,6 +69,7 @@
     </div>
     <livewire:academic-qualification.add-academic />
     <livewire:academic-qualification.edit-academic />
+    <livewire:academic-qualification.delete-academic />
     <div class="py-1 mt-2 container  mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-lg bg-white ">
         <div class="p-2 bg-white border-b border-gray-200 rounded-lg">
             <!-- Section Title -->
@@ -171,7 +172,7 @@
                 <i class="fas fa-edit text-sm"></i> {{ __('Update Education ') }}
             </button>
             <!-- Delete Button -->
-            <button type="button"
+            <button type="button" onclick="handleDeleteClick()"
                 class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 ease-in-out">
                 <i class="fas fa-trash-alt text-sm"></i> {{ __('Delete Education') }}
             </button>
@@ -211,6 +212,12 @@
         const educationId = getSelectedEducationId();
         if (educationId) {
             @this.edit(educationId); // Calls Livewire method directly
+        }
+    }
+    function handleDeleteClick() {
+        const educationId = getSelectedEducationId();
+        if (educationId) {
+            @this.delete(educationId); // Calls Livewire method directly
         }
     }
 </script>
