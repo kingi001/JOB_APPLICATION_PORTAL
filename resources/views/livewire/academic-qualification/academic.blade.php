@@ -1,75 +1,7 @@
 <div class="relative mb-6 w-full  mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center space-x-4 mb-1">
-        <img src="{{ asset('images/logo.png') }}" alt="BMA Logo" />
-        <div>
-            <flux:heading size="xl" level="2" class="text-indigo-800 font-semibold tracking-wide mb-2">
-                {{ __('Welcome to Bandari Maritime Academy Job Application Portal') }}
-            </flux:heading>
-            <flux:subheading size="base" class="text-gray-600 leading-relaxed max-w-4xl">
-                {{ __('Manage your profile, track applications, and update your account settings with ease.') }}
-            </flux:subheading>
-        </div>
-    </div>
-    <flux:separator variant="subtle" />
-    {{-- Bread Crumbs --}}
-    <div class="bg-gray-100 dark:bg-gray-800 py-0.5"> <!-- Reduced py-2 to py-1 -->
-        <div class="mx-auto flex items-center text-xs text-gray-600 dark:text-gray-400">
-            <!-- Reduced text-sm to text-xs -->
-            <nav class="flex px-6 py-1 text-blue-700 border border-blue-200 rounded-lg bg-blue-50 dark:bg-blue-800 dark:border-blue-700"
-                aria-label="Breadcrumb"> <!-- Reduced px-12 to px-6 -->
-                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <!-- Home Link -->
-                    <li class="inline-flex items-center">
-                        <a href="{{ route('dashboard') }}"
-                            class="inline-flex items-center text-xs font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                            <!-- Reduced text-sm to text-xs -->
-                            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 20 20"> <!-- Reduced w-4 h-4 to w-3 h-3 -->
-                                <path
-                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-                            </svg>
-                            Home
-                        </a>
-                    </li>
-                    @php
-                        $segments = request()->segments();
-                        $url = '';
-                    @endphp
-                    <!-- Dynamic Breadcrumbs -->
-                    @foreach ($segments as $index => $segment)
-                        @php
-                            $url .= '/' . $segment;
-                            $isLast = $loop->last;
-                            $name = ucwords(str_replace('-', ' ', $segment));
-                        @endphp
-                        <li>
-                            <div class="flex items-center">
-                                <svg class="rtl:rotate-180 w-2 h-2 mx-1 text-blue-500" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <!-- Reduced w-3 h-1 to w-2 h-2 -->
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 9 4-4-4-4" />
-                                </svg>
-                                @if (!$isLast)
-                                    <a href="{{ url($url) }}"
-                                        class="ms-1 text-xs font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                        {{ $name }}
-                                    </a>
-                                @else
-                                    <span class="ms-1 text-xs font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                        {{ $name }}
-                                    </span>
-                                @endif
-                            </div>
-                        </li>
-                    @endforeach
-                </ol>
-            </nav>
-        </div>
-    </div>
+    <livewire:header>
     <livewire:academic-qualification.add-academic />
     <livewire:academic-qualification.edit-academic />
-    <livewire:academic-qualification.delete-academic />
     <div class="py-1 mt-2 container  mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-lg bg-white ">
         <div class="p-2 bg-white border-b border-gray-200 rounded-lg">
             <!-- Section Title -->
@@ -80,7 +12,7 @@
         </div>
         <div class="px-4 py-3">
             <p class="text-sm text-gray-600 leading-relaxed">
-                Please provide details of your academic background, starting with the most recent qualification. Ensure
+                Please provide details of your academic background, <span class="font-medium text-indigo-600">starting with the most recent qualification.</span> Ensure
                 that all fields are completed accurately, as this information is critical for evaluating your
                 educational profile.
             </p>
@@ -112,8 +44,8 @@
 
                                 </th>
                                 <th class="px-4 py-3 text-left">Institution</th>
-                                <th class="px-4 py-3 text-left">Level of Study</th>
-                                <th class="px-4 py-3 text-left">Field of Study</th>
+                                <th class="px-4 py-3 text-left">Qualification Attained</th>
+                                <th class="px-4 py-3 text-left">Course</th>
                                 <th class="px-4 py-3 text-left">Award</th>
                                 <th class="px-4 py-3 text-left">Document</th>
                                 <th class="px-4 py-3 text-left">Start Date</th>
@@ -132,8 +64,8 @@
                                             class="education-checkbox form-checkbox rounded-sm h-3 w-3 text-indigo-600">
                                     </td>
                                     <td class="px-4 py-2">{{ $edu->institution }}</td>
-                                    <td class="px-4 py-2">{{ $edu->level_of_study }}</td>
-                                    <td class="px-4 py-2">{{ $edu->field_of_study }}</td>
+                                    <td class="px-4 py-2">{{ $edu->qualification }}</td>
+                                    <td class="px-4 py-2">{{ $edu->course }}</td>
                                     <td class="px-4 py-2">{{ $edu->award }}</td>
                                     <td class="px-4 py-2">
                                         @if ($edu->academic_document)
@@ -177,6 +109,46 @@
                 <i class="fas fa-trash-alt text-sm"></i> {{ __('Delete Education') }}
             </button>
         </div>
+    </div>
+    <div>
+        <flux:modal name="delete-education" class="min-w-[22rem]">
+            <div class="space-y-6">
+                <!-- Heading with Icon -->
+                <div class="flex items-start gap-3">
+                    <svg class="w-10 h-10 text-red-600 mt-1 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z" />
+                    </svg>
+                    <div>
+                        <flux:heading size="lg" class="text-red-700">Delete Academic Qualification?</flux:heading>
+                        <flux:text class="mt-2 text-sm text-gray-600">
+                            <p>Are you sure you want to delete the academic qualification for
+                                <span class="font-semibold text-red-600">{{ $selectedInstitution}}</span>
+                            </p>
+                            <p class="mt-1">This action <span class="font-semibold text-red-600">cannot be
+                                    undone.</span>
+                            </p>
+                        </flux:text>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex justify-end gap-2">
+                    <flux:modal.close>
+                        <flux:button variant="ghost" wire:click="cancelDelete()"
+                            class="hover:bg-gray-100 focus:ring-2 focus:ring-offset-1 focus:ring-gray-300">
+                            Cancel
+                        </flux:button>
+                    </flux:modal.close>
+                    <flux:button type="submit" variant="danger" wire:click="confirmDelete()"
+                        wire:loading.attr="disabled" wire:target="confirmDelete"
+                        class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
+                        <span wire:loading.remove wire:target="confirmDelete">Delete Qualification</span>
+                        <span wire:loading wire:target="confirmDelete">Deleting...</span>
+                    </flux:button>
+                </div>
+            </div>
+        </flux:modal>
     </div>
 </div>
 <script>

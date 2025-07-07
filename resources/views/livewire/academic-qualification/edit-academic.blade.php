@@ -17,10 +17,10 @@
                 />
 
                 <flux:select
-                    label="Level of Study"
+                    label="Qualification Attained"
                     size="sm"
-                    name="level_of_study"
-                    wire:model.defer="level_of_study"
+                    name="qualification"
+                    wire:model.defer="qualification"
                 >
                     <option value="">-- Select Level --</option>
                     @foreach (['KCPE', 'KCSE', 'Vocational Training', 'Certificate', 'Diploma', 'Higher Diploma', 'Bachelor', 'Master', 'PhD'] as $level)
@@ -31,18 +31,48 @@
                 <flux:input
                     label="Course"
                     size="sm"
-                    name="field_of_study"
+                    name="course"
                     placeholder="e.g. Computer Science"
-                    wire:model.defer="field_of_study"
+                    wire:model.defer="course"
                 />
 
-                <flux:input
-                    label="Award"
-                    size="sm"
-                    name="award"
-                    placeholder="e.g. Bachelor of Science"
-                    wire:model.defer="award"
-                />
+            <flux:select
+    label="Award"
+    size="sm"
+    name="award"
+    wire:model.defer="award"
+>
+     <option value="">-- Select Award --</option>
+
+    <optgroup label="University Classifications">
+        <option value="First Class Honor">First Class Honor</option>
+        <option value="Second Class Upper">Second Class Upper</option>
+        <option value="Second Class Lower">Second Class Lower</option>
+        <option value="Third Class">Third Class</option>
+        <option value="Honors">Honors</option>
+        <option value="Merit">Merit</option>
+    </optgroup>
+
+    <optgroup label="Diploma/Certificate Grades">
+        <option value="Distinction">Distinction</option>
+        <option value="Credit">Credit</option>
+        <option value="Pass">Pass</option>
+        <option value="Fail">Fail</option>
+    </optgroup>
+
+    <optgroup label="KCSE/KCPE Letter Grades">
+        <option value="A">A</option>
+        <option value="A-">A-</option>
+        <option value="B">B</option>
+        <option value="B-">B-</option>
+        <option value="C">C</option>
+        <option value="C-">C-</option>
+        <option value="D">D</option>
+        <option value="D-">D-</option>
+        <option value="E">E</option>
+    </optgroup>
+</flux:select>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">

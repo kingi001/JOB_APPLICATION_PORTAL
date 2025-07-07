@@ -12,11 +12,13 @@ use App\Http\Controllers\VacancyController;
 use App\Livewire\AcademicQualification\Academic;
 use App\Livewire\Applicant\PersonalInformation;
 use App\Livewire\Notes;
+use App\Livewire\ProfessionanlQualification\Professional;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Vacancy\Vacancy;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -30,13 +32,13 @@ Route::get('/dashboard', [ApplicantDashboardController::class, 'index'])
 
 Route::middleware(['auth'])->group(function () {
     //notes routes
-    Route::get('personal-information', PersonalInformation::class)->name('personal-information');
-    Route::get('vacancies', Vacancy::class)->name('vacancies');
-    Route::get('education', Academic::class)->name('education');
+    Route::get('PersonalInformation', PersonalInformation::class)->name('personal-information');
+    Route::get('Vacancies', Vacancy::class)->name('vacancies');
+    Route::get('AcademicQualification', Academic::class)->name('education');
+    Route::get('ProfessionalQualification', Professional::class)->name('professional-qualification');
     Route::redirect('settings', 'settings/profile');
 
     // Route::resource('education', AcademicQualificationController::class);
-    Route::resource('qualifications', ProfessionalQualificationController::class);
     Route::resource('memberships', MembershipController::class);
     Route::resource('employment', EmploymentHistoryController::class);
     Route::resource('referees', RefereeController::class);

@@ -10,11 +10,13 @@ use Livewire\Component;
 class Academic extends Component
 {
     public $educationId;
+    public $selectedInstitution;
+
     public array $selectedIds = [];
     public function render()
     {
         $education = Education::where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
         return view(
             'livewire.academic-qualification.academic',
@@ -31,16 +33,22 @@ class Academic extends Component
     }
     public function delete($id)
     {
-        // Step 1: Find the education record or fail
         $education = Education::findOrFail($id);
-
-        // Step 2: Store ID for deletion
         $this->educationId = $education->id;
-
-        // Step 3: Store only necessary fields in the array
-        $this->selectedIds = $education->only(['id', 'institution', 'start_date', 'end_date']);
-
-        // Step 4: Show the delete confirmation modal
+        $this->selectedInstitution = $education->institution; // Assuming institution is a field in the Education model
         Flux::modal('delete-education')->show();
+    }
+    public function confirmDelete()
+    {
+        $education = Education::findOrFail($this->educationId);
+        $education->delete();
+        session()->flash('message', 'Academic qualification deleted successfully.');
+        Flux::modal('delete-education')->close();
+        redirect()->route('education');
+    }
+      public function cancelDelete()
+    {
+        $this->reset(['educationId', 'selectedIds']);
+        Flux::modal('delete-education')->close();
     }
 }

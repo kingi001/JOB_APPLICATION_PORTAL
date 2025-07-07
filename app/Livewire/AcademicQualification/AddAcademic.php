@@ -10,11 +10,11 @@ use Livewire\WithFileUploads;
 class AddAcademic extends Component
 {
     use WithFileUploads;
-    public $institution, $level_of_study, $field_of_study, $award, $academic_document, $start_date, $end_date;
+    public $institution, $qualification, $course, $award, $academic_document, $start_date, $end_date;
     protected $rules = [
         'institution' => 'required|string|max:255',
-        'level_of_study' => 'required|in:KCPE,KCSE,Vocational Training,Certificate,Diploma,Higher Diploma,Bachelor,Master,PhD',
-        'field_of_study' => 'required|string|max:255',
+        'qualification' => 'required|in:KCPE,KCSE,Vocational Training,Certificate,Diploma,Higher Diploma,Bachelor,Master,PhD',
+        'course' => 'required|string|max:255',
         'award' => 'required|string|max:255',
         'academic_document' => 'nullable|file|mimes:pdf|max:5120',
         'start_date' => 'required|date|before_or_equal:today',
@@ -30,15 +30,15 @@ class AddAcademic extends Component
         Education::create([
             'user_id' => Auth::id(),
             'institution' => $this->institution,
-            'level_of_study' => $this->level_of_study,
-            'field_of_study' => $this->field_of_study,
+            'qualification' => $this->qualification,
+            'course' => $this->course,
             'award' => $this->award,
             'academic_document' => $filePath,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
         ]);
-        session()->flash('success', 'Academic qualification added successfully!');
-        $this->reset(['institution', 'level_of_study', 'field_of_study', 'award', 'academic_document', 'start_date', 'end_date']);
+        session()->flash('message', 'Academic qualification added successfully!');
+        $this->reset(['institution', 'qualification', 'course', 'award', 'academic_document', 'start_date', 'end_date']);
         return redirect()->route('education');
     }
     //SODE TO REMOVE VALIDATION ERROR WHEN DOCUMENT IS REMOVED

@@ -12,8 +12,8 @@ class Education extends Model
     protected $fillable = [
         'user_id',
         'institution',
-        'level_of_study',
-        'field_of_study',
+        'qualification',
+        'course',
         'award',
         'academic_document',
         'start_date',

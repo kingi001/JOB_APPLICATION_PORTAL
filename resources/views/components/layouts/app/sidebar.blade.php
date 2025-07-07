@@ -16,7 +16,7 @@
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <x-app-logo />
         </a>
-    
+
 
         <flux:navlist variant="outline">
 
@@ -62,8 +62,8 @@
                     <i class="fas fa-graduation-cap text-gray-700 text-sm mr-3"></i>{{ __('Academic Qualifications') }}
                 </flux:navlist.item>
 
-                <flux:navlist.item :href="route('qualifications.index')"
-                    :current="request()->routeIs('qualifications.index')" wire:navigate>
+                <flux:navlist.item :href="route('professional-qualification')"
+                    :current="request()->routeIs('professional-qualification')" wire:navigate>
                     <i class="fas fa-certificate text-gray-700 text-sm mr-3"></i>{{ __('Professional Qualifications') }}
                 </flux:navlist.item>
 

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->text('duties');
             $table->date('application_deadline');
             $table->enum('status', ['open', 'closed'])->default('open');
+            $table->enum('terms_of_employment', ['Internship', 'Permanent', 'Contract', 'Attachment', 'casual'])->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

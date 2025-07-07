@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('institution');
-            $table->enum('level_of_study', ['KCPE', 'KCSE', 'Vocational Training', 'Certificate', 'Diploma', 'Higher Diploma', 'Bachelor', 'Master', 'PhD']);
-            $table->string('field_of_study');
-            $table->string('award');
+            $table->enum('qualification', ['KCPE', 'KCSE', 'Vocational Training', 'Certificate', 'Diploma', 'Higher Diploma', 'Bachelor', 'Master', 'PhD']);
+            $table->string('course');
+            $table->enum('award',[ 'Pass', 'Credit', 'Distinction', 'Merit', 'Honors', 'First Class Honor', 'Second Class Upper', 'Second Class Lower', 'Third Class', 'Fail','A','A-','B','B-','C','C-','D','D-','E']);
             $table->string('academic_document')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();

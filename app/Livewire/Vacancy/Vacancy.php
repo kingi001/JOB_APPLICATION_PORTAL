@@ -37,7 +37,7 @@ class Vacancy extends Component
             ->when($this->status === 'deleted', fn($q) => $q->onlyTrashed())
             ->when($this->status === 'open', fn($q) => $q->where('status', 'open'))
             ->when($this->status === 'closed', fn($q) => $q->where('status', 'closed'))
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate(10);
 
         return view('livewire.vacancy.vacancy', [
