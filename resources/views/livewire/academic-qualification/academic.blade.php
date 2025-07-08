@@ -1,4 +1,4 @@
-<div class="relative mb-6 w-full  mx-auto px-4 sm:px-6 lg:px-8">
+<div>
     <livewire:header>
     <livewire:academic-qualification.add-academic />
     <livewire:academic-qualification.edit-academic />
@@ -41,7 +41,6 @@
                                 <th class=" text-left px-4 py-3">#</th>
                                 <th class="text-left px-4 py-3">
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
-
                                 </th>
                                 <th class="px-4 py-3 text-left">Institution</th>
                                 <th class="px-4 py-3 text-left">Qualification Attained</th>

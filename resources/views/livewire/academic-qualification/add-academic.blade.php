@@ -59,7 +59,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <flux:input label="Start Date" size="sm" type="date" name="start_date" wire:model.defer="start_date" />
 
-                <flux:input label="End Date" size="sm" type="date" name="end_date" wire:model.defer="end_date" />
+                <flux:input label="End Date (leave blank if ongoing)" size="sm" type="date" name="end_date" wire:model.defer="end_date" />
             </div>
             <!-- code to handle uploads-->
             <div class="space-y-2">

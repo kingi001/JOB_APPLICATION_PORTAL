@@ -31,20 +31,20 @@
                 <flux:navlist.item :href="route('vacancies')" :current="request()->routeIs('vacancies')" wire:navigate>
                     <i class="fas fa-briefcase text-gray-700 text-sm mr-3"></i>{{ __('Vacancies') }}
                 </flux:navlist.item>
-                <flux:navlist.item wire:navigate>
-                    <i class="fas fa-users text-gray-700 text-sm mr-3"></i>{{ __('Applicants') }}
+                <flux:navlist.item :href="route('applications')" :current="request()->routeIs('applications')" wire:navigate>
+                    <i class="fas fa-users text-gray-700 text-sm mr-3"></i>{{ __('Applications') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('screening')" :current="request()->routeIs('screening')" wire:navigate>
+                    <i class="fas fa-clipboard-check text-gray-700 text-sm mr-3"></i>{{ __('Screening') }}
                 </flux:navlist.item>
                 <flux:navlist.item wire:navigate>
-                    <i class="fas fa-clipboard-check text-gray-700 text-sm mr-3"></i>{{ __('Evaluate Applicants') }}
+                    <i class="fas fa-user-check text-gray-700 text-sm mr-3"></i>{{ __('Shortlisting') }}
                 </flux:navlist.item>
                 <flux:navlist.item wire:navigate>
-                    <i class="fas fa-user-check text-gray-700 text-sm mr-3"></i>{{ __('Shortlist Applicants') }}
+                    <i class="fas fa-comments text-gray-700 text-sm mr-3"></i>{{ __('Interview') }}
                 </flux:navlist.item>
                 <flux:navlist.item wire:navigate>
-                    <i class="fas fa-comments text-gray-700 text-sm mr-3"></i>{{ __('Schedule Interview') }}
-                </flux:navlist.item>
-                <flux:navlist.item wire:navigate>
-                    <i class="fas fa-check-circle text-gray-700 text-sm mr-3"></i>{{ __('Final Selection') }}
+                    <i class="fas fa-check-circle text-gray-700 text-sm mr-3"></i>{{ __('Selection') }}
                 </flux:navlist.item>
 
 

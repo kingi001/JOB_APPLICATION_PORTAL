@@ -1,8 +1,8 @@
-<div class="relative mb-6 w-full  mx-auto px-4 sm:px-6 lg:px-8">
+<div>
     <div class="flex items-center space-x-4 mb-1">
         <img src="{{ asset('images/logo.png') }}" alt="BMA Logo" />
         <div>
-            <flux:heading size="xl" level="2" class="text-indigo-800 font-semibold tracking-wide mb-2">
+            <flux:heading size="xl" level="2" class="text-indigo-800 font-semibold tracking-wide">
                 {{ __('Welcome to Bandari Maritime Academy Job Application Portal') }}
             </flux:heading>
             <flux:subheading size="base" class="text-gray-600 leading-relaxed max-w-4xl">

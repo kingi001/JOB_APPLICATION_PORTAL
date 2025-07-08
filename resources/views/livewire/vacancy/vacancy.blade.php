@@ -1,4 +1,4 @@
-<div class="relative mb-2 w-full  mx-auto px-4 sm:px-6 lg:px-8">
+<div>
     <livewire:header>
 
     @if (session('success'))

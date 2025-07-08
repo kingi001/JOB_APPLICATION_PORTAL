@@ -11,8 +11,10 @@ use App\Http\Controllers\RefereeController;
 use App\Http\Controllers\VacancyController;
 use App\Livewire\AcademicQualification\Academic;
 use App\Livewire\Applicant\PersonalInformation;
+use App\Livewire\Applications;
 use App\Livewire\Notes;
 use App\Livewire\ProfessionanlQualification\Professional;
+use App\Livewire\Screening;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -36,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Vacancies', Vacancy::class)->name('vacancies');
     Route::get('AcademicQualification', Academic::class)->name('education');
     Route::get('ProfessionalQualification', Professional::class)->name('professional-qualification');
+    Route::get('Applications', Applications::class)->name('applications');
+    Route::get('Screening', Screening::class)->name('screening');
+
     Route::redirect('settings', 'settings/profile');
 
     // Route::resource('education', AcademicQualificationController::class);

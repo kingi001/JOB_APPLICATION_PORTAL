@@ -1,5 +1,5 @@
 <x-layouts.app :title="__('Dashboard')">
-    <div class="relative mb-1 w-full  mx-auto px-4 sm:px-6 lg:px-8">
+    <div>
         <div class="flex items-center space-x-4 mb-1">
             <img src="{{ asset('images/logo.png') }}" alt="BMA Logo" />
             <div>
