@@ -17,14 +17,13 @@ return new class extends Migration
             $table->string('qualification_name');
             $table->string('certifying_body');
             $table->string('certificate_number')->nullable();
-            $table->enum('award',['certified','pass','distinction','credit'])->nullable();
+            $table->enum('award',['Licensed','Certified','Pass','Distinction','Credit'])->nullable();
             $table->date('date_awarded')->nullable();
             $table->date('valid_until')->nullable();
             $table->string('qualification_document')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

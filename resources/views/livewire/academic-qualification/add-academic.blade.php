@@ -24,7 +24,6 @@
 
                 <flux:select label="Award" size="sm" name="award" wire:model.defer="award">
     <option value="">-- Select Award --</option>
-
     <optgroup label="University Classifications">
         <option value="First Class Honor">First Class Honor</option>
         <option value="Second Class Upper">Second Class Upper</option>

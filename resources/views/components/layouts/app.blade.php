@@ -1,5 +1,5 @@
 <x-layouts.app.sidebar :title="$title ?? null">
-    <flux:main>
+    <flux:main >
         {{ $slot }}
     </flux:main>
     <footer class="fixed bottom-0 left-64 z-20 right-0 bg-white shadow-md dark:bg-blue-800 border-t border-gray-300">
@@ -22,7 +22,7 @@
                     <i class="fa fa-briefcase text-sm" aria-hidden="true"></i>
                     <span title="System ownership">Licensed to Bandari Maritime Academy</span>
                 </li>
-                <li class="flex items-center gap-2 text-blue-600 dark:text-blue-300 uppercase font-semibold">
+                <li class="flex items-center gap-2 text-blue-600 dark:text-blue-300 font-medium uppercase">
                     <i class="fa fa-user text-sm" aria-hidden="true"></i>
                     <span title="Currently logged in user">Signed In: {{ Auth::user()->name }}</span>
                 </li>

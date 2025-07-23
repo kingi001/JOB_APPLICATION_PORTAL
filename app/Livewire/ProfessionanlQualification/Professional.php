@@ -37,7 +37,7 @@ class Professional extends Component
     {
         $professional = ProfessionalQualification::findOrFail($id);
         $this->professionalId = $professional->id;
-        $this->selectedqualificationname = $professional->institution; // Assuming institution is a field in the professional model
+        $this->selectedqualificationname = $professional->qualification_name; // Assuming institution is a field in the professional model
         Flux::modal('delete-professional')->show();
     }
         public function confirmDelete()

@@ -9,7 +9,9 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-gray-50 dark:bg-zinc-800">
+<body class="min-h-screen bg-gray-50 dark:bg-zinc-800"  style="background-image: url('{{ asset('images/bgpattern.gif') }}');
+       background-repeat: repeat;
+       background-attachment: fixed;">
     <flux:sidebar sticky stashable class="border-e border-blue-200 bg-blue-50 dark:border-blue-700 dark:bg-blue-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
@@ -46,7 +48,6 @@
                 <flux:navlist.item wire:navigate>
                     <i class="fas fa-check-circle text-gray-700 text-sm mr-3"></i>{{ __('Selection') }}
                 </flux:navlist.item>
-
 
             </flux:navlist.group>
             <flux:navlist.group :heading="__('Personal Profile')" class="grid">

@@ -1,18 +1,12 @@
 <?php
-
-use App\Http\Controllers\AcademicQualificationController;
 use App\Http\Controllers\ApplicantDashboardController;
 use App\Http\Controllers\DocumentUploadController;
 use App\Http\Controllers\EmploymentHistoryController;
 use App\Http\Controllers\MembershipController;
-use App\Http\Controllers\PersonalDetailsController;
-use App\Http\Controllers\ProfessionalQualificationController;
 use App\Http\Controllers\RefereeController;
-use App\Http\Controllers\VacancyController;
 use App\Livewire\AcademicQualification\Academic;
 use App\Livewire\Applicant\PersonalInformation;
 use App\Livewire\Applications;
-use App\Livewire\Notes;
 use App\Livewire\ProfessionanlQualification\Professional;
 use App\Livewire\Screening;
 use App\Livewire\Settings\Appearance;
@@ -20,9 +14,6 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Vacancy\Vacancy;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,7 +34,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::redirect('settings', 'settings/profile');
 
-    // Route::resource('education', AcademicQualificationController::class);
     Route::resource('memberships', MembershipController::class);
     Route::resource('employment', EmploymentHistoryController::class);
     Route::resource('referees', RefereeController::class);
