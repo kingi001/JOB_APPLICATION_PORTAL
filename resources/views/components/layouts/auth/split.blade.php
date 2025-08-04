@@ -6,6 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
     @include('partials.head')
+
+    
 </head>
 
 <body class="min-h-screen bg-white antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900"  style="background-image: url('{{ asset('images/bgpattern.gif') }}');

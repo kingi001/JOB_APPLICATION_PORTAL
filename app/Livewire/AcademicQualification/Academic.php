@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Livewire\AcademicQualification;
-
 use App\Models\Education;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +9,6 @@ class Academic extends Component
 {
     public $educationId;
     public $selectedInstitution;
-
     public array $selectedIds = [];
     public function render()
     {
@@ -23,6 +20,7 @@ class Academic extends Component
             ['education' => $education]
         );
     }
+
     public function getSelectedIds()
     {
         return $this->selectedIds;
@@ -46,7 +44,7 @@ class Academic extends Component
         Flux::modal('delete-education')->close();
         redirect()->route('education');
     }
-      public function cancelDelete()
+    public function cancelDelete()
     {
         $this->reset(['educationId', 'selectedIds']);
         Flux::modal('delete-education')->close();

@@ -9,11 +9,10 @@ use Livewire\Component;
 
 class Professional extends Component
 {
-    public $professionalId;
+    public $professionId;
     public $selectedqualificationname;
-    public $selected;
     // an array to hold selected qualifications for bulk delete
-    public array $selectedIds = [];
+    // public array $selectedIds = [];
     public function render()
     {
         // This method is responsible for rendering the view
@@ -25,28 +24,33 @@ class Professional extends Component
             'professional' => $professional
         ]);
     }
-     public function getSelectedIds()
-    {
-        return $this->selectedIds;
-    }
+    //  public function getSelectedIds()
+    // {
+    //     return $this->selectedIds;
+    // }
     public function edit($id)
     {
-        $this->dispatch('edit-professional', $id);
+        $this->dispatch('edit-profession', $id);
     }
      public function delete($id)
     {
         $professional = ProfessionalQualification::findOrFail($id);
-        $this->professionalId = $professional->id;
+        $this->professionId = $professional->id;
         $this->selectedqualificationname = $professional->qualification_name; // Assuming institution is a field in the professional model
-        Flux::modal('delete-professional')->show();
+        Flux::modal('delete-profession')->show();
     }
         public function confirmDelete()
     {
-        $professional = ProfessionalQualification::findOrFail($this->professionalId);
+        $professional = ProfessionalQualification::findOrFail($this->professionId);
         $professional->delete();
         session()->flash('message', 'Academic qualification deleted successfully.');
         Flux::modal('delete-professional')->close();
-        redirect()->route('ProfessionalQualification');
+        redirect()->route('professional-qualification');
+    }
+    public function cancelDelete()
+    {
+        $this->reset(['professionId']);
+        Flux::modal('delete-professional')->close();
     }
 }
 

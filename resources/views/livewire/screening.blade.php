@@ -1,7 +1,6 @@
 <div>
     <livewire:header />
     <div x-data="{ tab: 'requirements' }" class="mt-4 px-4">
-
         <!-- Tabs Navigation -->
         <div class="flex border-b border-gray-300 mb-4 space-x-4">
             <button @click="tab = 'requirements'"

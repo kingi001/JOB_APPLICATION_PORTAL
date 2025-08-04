@@ -23,42 +23,43 @@
                     wire:model.defer="course" />
 
                 <flux:select label="Award" size="sm" name="award" wire:model.defer="award">
-    <option value="">-- Select Award --</option>
-    <optgroup label="University Classifications">
-        <option value="First Class Honor">First Class Honor</option>
-        <option value="Second Class Upper">Second Class Upper</option>
-        <option value="Second Class Lower">Second Class Lower</option>
-        <option value="Third Class">Third Class</option>
-        <option value="Honors">Honors</option>
-        <option value="Merit">Merit</option>
-    </optgroup>
+                    <option value="">-- Select Award --</option>
+                    <optgroup label="University Classifications">
+                        <option value="First Class Honor">First Class Honor</option>
+                        <option value="Second Class Upper">Second Class Upper</option>
+                        <option value="Second Class Lower">Second Class Lower</option>
+                        <option value="Third Class">Third Class</option>
+                        <option value="Honors">Honors</option>
+                        <option value="Merit">Merit</option>
+                    </optgroup>
 
-    <optgroup label="Diploma/Certificate Grades">
-        <option value="Distinction">Distinction</option>
-        <option value="Credit">Credit</option>
-        <option value="Pass">Pass</option>
-        <option value="Fail">Fail</option>
-    </optgroup>
+                    <optgroup label="Diploma/Certificate Grades">
+                        <option value="Distinction">Distinction</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </optgroup>
 
-    <optgroup label="KCSE / KCPE Letter Grades">
-        <option value="A">A</option>
-        <option value="A-">A-</option>
-        <option value="B">B</option>
-        <option value="B-">B-</option>
-        <option value="C">C</option>
-        <option value="C-">C-</option>
-        <option value="D">D</option>
-        <option value="D-">D-</option>
-        <option value="E">E</option>
-    </optgroup>
-</flux:select>
+                    <optgroup label="KCSE / KCPE Letter Grades">
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C">C</option>
+                        <option value="C-">C-</option>
+                        <option value="D">D</option>
+                        <option value="D-">D-</option>
+                        <option value="E">E</option>
+                    </optgroup>
+                </flux:select>
 
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <flux:input label="Start Date" size="sm" type="date" name="start_date" wire:model.defer="start_date" />
 
-                <flux:input label="End Date (leave blank if ongoing)" size="sm" type="date" name="end_date" wire:model.defer="end_date" />
+                <flux:input label="End Date (leave blank if ongoing)" size="sm" type="date" name="end_date"
+                    wire:model.defer="end_date" />
             </div>
             <!-- code to handle uploads-->
             <div class="space-y-2">
@@ -76,14 +77,14 @@
         }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false"
                     x-on:livewire-upload-error="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress"
-                    class="relative border border-dashed border-gray-300 rounded-lg p-4">
+                    class="relative border-2 border-dashed border-gray-300 rounded-lg p-5 transition">
                     <input type="file" id="academic_document" name="academic_document"
                         wire:model.defer="academic_document" accept=".pdf"
                         class="opacity-0 absolute inset-0 cursor-pointer z-10" />
 
                     <div class="flex items-center space-x-3 pointer-events-none">
                         <i class="fas fa-file-upload text-indigo-500 text-2xl"></i>
-                        <span class="text-indigo-600 text-sm font-medium">
+                        <span class="text-indigo-600 text-sm font-medium text">
                             Click or drag to upload Academic Certificate
                         </span>
                     </div>
@@ -121,6 +122,16 @@
             <div class="flex">
                 <flux:spacer />
                 <flux:button size="sm" type="submit" variant="primary" wire:click="submit">Save</flux:button>
+                <div wire:loading class="flex items-center space-x-2 text-sm text-blue-600 ml-2 animate-pulse">
+                    <svg class="w-4 h-4 animate-spin text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <span>Adding Education...</span>
+                </div>
+
             </div>
         </div>
     </flux:modal>

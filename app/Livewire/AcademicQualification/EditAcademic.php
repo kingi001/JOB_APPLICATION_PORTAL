@@ -1,20 +1,16 @@
 <?php
 
 namespace App\Livewire\AcademicQualification;
-
 use App\Models\Education;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
-
 class EditAcademic extends Component
 {
     use WithFileUploads;
     public $educationId, $institution, $qualification, $course, $award, $academic_document, $start_date, $end_date;
     public $education_document_path;
-
     #[On('edit-academic')]
     public function editAcademic($id)
     {

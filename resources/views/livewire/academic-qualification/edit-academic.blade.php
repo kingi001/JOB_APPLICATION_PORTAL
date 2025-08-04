@@ -8,90 +8,59 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <flux:input
-                    label="Institution"
-                    size="sm"
-                    name="institution"
-                    placeholder="e.g. Jomo Kenyatta University"
-                    wire:model.defer="institution"
-                />
+                <flux:input label="Institution" size="sm" name="institution" placeholder="e.g. Jomo Kenyatta University"
+                    wire:model.defer="institution" />
 
-                <flux:select
-                    label="Qualification Attained"
-                    size="sm"
-                    name="qualification"
-                    wire:model.defer="qualification"
-                >
+                <flux:select label="Qualification Attained" size="sm" name="qualification"
+                    wire:model.defer="qualification">
                     <option value="">-- Select Level --</option>
                     @foreach (['KCPE', 'KCSE', 'Vocational Training', 'Certificate', 'Diploma', 'Higher Diploma', 'Bachelor', 'Master', 'PhD'] as $level)
                         <option value="{{ $level }}">{{ $level }}</option>
                     @endforeach
                 </flux:select>
 
-                <flux:input
-                    label="Course"
-                    size="sm"
-                    name="course"
-                    placeholder="e.g. Computer Science"
-                    wire:model.defer="course"
-                />
+                <flux:input label="Course" size="sm" name="course" placeholder="e.g. Computer Science"
+                    wire:model.defer="course" />
 
-            <flux:select
-    label="Award"
-    size="sm"
-    name="award"
-    wire:model.defer="award"
->
-     <option value="">-- Select Award --</option>
+                <flux:select label="Award" size="sm" name="award" wire:model.defer="award">
+                    <option value="">-- Select Award --</option>
 
-    <optgroup label="University Classifications">
-        <option value="First Class Honor">First Class Honor</option>
-        <option value="Second Class Upper">Second Class Upper</option>
-        <option value="Second Class Lower">Second Class Lower</option>
-        <option value="Third Class">Third Class</option>
-        <option value="Honors">Honors</option>
-        <option value="Merit">Merit</option>
-    </optgroup>
+                    <optgroup label="University Classifications">
+                        <option value="First Class Honor">First Class Honor</option>
+                        <option value="Second Class Upper">Second Class Upper</option>
+                        <option value="Second Class Lower">Second Class Lower</option>
+                        <option value="Third Class">Third Class</option>
+                        <option value="Honors">Honors</option>
+                        <option value="Merit">Merit</option>
+                    </optgroup>
 
-    <optgroup label="Diploma/Certificate Grades">
-        <option value="Distinction">Distinction</option>
-        <option value="Credit">Credit</option>
-        <option value="Pass">Pass</option>
-        <option value="Fail">Fail</option>
-    </optgroup>
+                    <optgroup label="Diploma/Certificate Grades">
+                        <option value="Distinction">Distinction</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </optgroup>
 
-    <optgroup label="KCSE/KCPE Letter Grades">
-        <option value="A">A</option>
-        <option value="A-">A-</option>
-        <option value="B">B</option>
-        <option value="B-">B-</option>
-        <option value="C">C</option>
-        <option value="C-">C-</option>
-        <option value="D">D</option>
-        <option value="D-">D-</option>
-        <option value="E">E</option>
-    </optgroup>
-</flux:select>
+                    <optgroup label="KCSE/KCPE Letter Grades">
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C">C</option>
+                        <option value="C-">C-</option>
+                        <option value="D">D</option>
+                        <option value="D-">D-</option>
+                        <option value="E">E</option>
+                    </optgroup>
+                </flux:select>
 
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <flux:input
-                    label="Start Date"
-                    size="sm"
-                    type="date"
-                    name="start_date"
-                    wire:model.defer="start_date"
-                    max="{{ now()->toDateString() }}"
-                />
+                <flux:input label="Start Date" size="sm" type="date" name="start_date" wire:model.defer="start_date"
+                    max="{{ now()->toDateString() }}" />
 
-                <flux:input
-                    label="End Date"
-                    size="sm"
-                    type="date"
-                    name="end_date"
-                    wire:model.defer="end_date"
-                />
+                <flux:input label="End Date" size="sm" type="date" name="end_date" wire:model.defer="end_date" />
             </div>
 
             <!-- Upload Section -->
@@ -100,29 +69,20 @@
                     Academic Document (PDF only)
                 </flux:label>
 
-                <div
-                    x-data="{
+                <div x-data="{
                         progress: 0,
                         isUploading: false,
                         removeFile() {
                             @this.call('removeDocument')
                             this.progress = 0;
                         }
-                    }"
-                    x-on:livewire-upload-start="isUploading = true"
-                    x-on:livewire-upload-finish="isUploading = false"
-                    x-on:livewire-upload-error="isUploading = false"
+                    }" x-on:livewire-upload-start="isUploading = true"
+                    x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress"
-                    class="relative border border-dashed border-gray-300 rounded-lg p-4"
-                >
-                    <input
-                        type="file"
-                        id="academic_document"
-                        name="academic_document"
-                        wire:model.defer="academic_document"
-                        accept=".pdf"
-                        class="opacity-0 absolute inset-0 cursor-pointer z-10"
-                    />
+                    class="relative border border-dashed border-gray-300 rounded-lg p-4">
+                    <input type="file" id="academic_document" name="academic_document"
+                        wire:model.defer="academic_document" accept=".pdf"
+                        class="opacity-0 absolute inset-0 cursor-pointer z-10" />
 
                     <div class="flex items-center space-x-3 pointer-events-none">
                         <i class="fas fa-file-upload text-indigo-500 text-2xl"></i>
@@ -142,26 +102,42 @@
                     </template>
                 </div>
 
-                <!-- Preview / Remove -->
                 @if ($academic_document)
-                    <div class="flex items-center justify-between mt-2 bg-gray-100 p-2 rounded-md text-sm text-gray-700">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-file-pdf text-red-500"></i>
-                            <span>{{ $academic_document->getClientOriginalName() }}</span>
+                    <div
+                        class="flex items-center justify-between mt-3 bg-white border border-gray-200 rounded-lg shadow-sm p-3 transition-all duration-300 ease-in-out animate-fade-in">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-file-pdf text-red-500 text-lg"></i>
+                            <span class="text-gray-800 font-medium">
+                                {{ $academic_document->getClientOriginalName() }}
+                            </span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-0.5 rounded-full">New
+                                Upload</span>
                         </div>
-                        <button type="button" class="text-red-600 hover:text-red-800" wire:click="removeDocument">
-                            <i class="fas fa-times-circle"></i> Remove
+                        <button type="button"
+                            class="text-red-500 hover:text-red-700 text-sm flex items-center space-x-1 transition-all duration-200"
+                            wire:click="removeDocument">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Remove</span>
                         </button>
                     </div>
-                @elseif($education_document_path)
-                    <div class="flex items-center justify-between mt-2 bg-gray-100 p-2 rounded-md text-sm text-gray-700">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-file-pdf text-red-500"></i>
-                            <a href="{{ Storage::url($education_document_path) }}" target="_blank" class="text-indigo-600 hover:underline">View current document</a>
+
+                @elseif ($education_document_path)
+                    <div
+                        class="flex items-center justify-between mt-3 bg-white border border-gray-200 rounded-lg shadow-sm p-3 transition-all duration-300 ease-in-out animate-fade-in">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-file-pdf text-red-500 text-lg"></i>
+                            <a href="{{ Storage::url($education_document_path) }}" target="_blank"
+                                class="text-indigo-600 hover:underline font-medium">
+                                View current document </a>
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-0.5 rounded-full">Saved</span>
                         </div>
-                        <button type="button" class="text-red-600 hover:text-red-800" wire:click="removeDocument">
-                            <i class="fas fa-times-circle"></i> Remove
-                        </button>
+                        {{-- <button type="button"
+                            class="text-red-500 hover:text-red-700 text-sm flex items-center space-x-1 transition-all duration-200"
+                            wire:click="removeDocument">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Remove</span>
+                        </button> --}}
                     </div>
                 @endif
 
@@ -178,4 +154,3 @@
         </div>
     </flux:modal>
 </div>
-

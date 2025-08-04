@@ -22,6 +22,7 @@ class AddAcademic extends Component
     ];
     public function submit()
     {
+        sleep(1); // Simulate a delay for demonstration purposes
         $this->validate();
         $filePath = null;
         if ($this->academic_document) {

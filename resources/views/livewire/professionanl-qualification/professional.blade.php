@@ -1,5 +1,6 @@
 <div>
     <livewire:professionanl-qualification.addprofessional>
+    <livewire:professionanl-qualification.editprofessional>
         <livewire:header>
             @if (session('success'))
                 <div x-data="{ show: true }" x-show="show" x-transition:enter="transition ease-out duration-500"
@@ -67,7 +68,6 @@
                                         <th class=" text-left px-4 py-3">#</th>
                                         <th class="text-left px-4 py-3">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
-
                                         </th>
                                         <th class="px-4 py-3 text-left">Qualification</th>
                                         <th class="px-4 py-3 text-left">Certifying Body</th>
@@ -85,16 +85,17 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td class="px-4 py-3 text-gray-800 whitespace-nowrap">
-                                                <input type="checkbox" wire:model="selectedIds" name="education_ids[]"
+                                                <input type="checkbox" wire:model="selectedIds" name="profession_ids[]"
                                                     value="{{ $profession->id }}"
-                                                    class="education-checkbox form-checkbox rounded-sm h-3 w-3 text-indigo-600">
+                                                    class="profession-checkbox form-checkbox rounded-sm h-3 w-3 text-indigo-600">
                                             </td>
                                             <td class="px-4 py-2">{{ $profession->qualification_name }}</td>
                                             <td class="px-4 py-2">{{ $profession->certifying_body }}</td>
                                             <td class="px-4 py-2">{{ $profession->certificate_number }}</td>
                                             <td class="px-4 py-2">{{ $profession->award }}</td>
                                             <td class="px-4 py-2">
-                                                {{ \Carbon\Carbon::parse($profession->date_awarded)->toFormattedDateString() }}</td>
+                                                {{ \Carbon\Carbon::parse($profession->date_awarded)->toFormattedDateString() }}
+                                            </td>
                                             <td class="px-4 py-2">
                                                 {{ $profession->valid_until ? \Carbon\Carbon::parse($profession->valid_until)->toFormattedDateString() : 'Indefinite' }}
                                             </td>
@@ -137,4 +138,87 @@
                     </button>
                 </div>
             </div>
+
+            <div>
+        <flux:modal name="delete-profession" class="min-w-[22rem]">
+            <div class="space-y-6">
+                <!-- Heading with Icon -->
+                <div class="flex items-start gap-3">
+                    <svg class="w-10 h-10 text-red-600 mt-1 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z" />
+                    </svg>
+                    <div>
+                        <flux:heading size="lg" class="text-red-700">Delete Professional Qualification?</flux:heading>
+                        <flux:text class="mt-2 text-sm text-gray-600">
+                            <p>Are you sure you want to delete the professional qualification for
+                                <span class="font-semibold text-red-600">{{ $selectedqualificationname}}</span>
+                            </p>
+                            <p class="mt-1">This action <span class="font-semibold text-red-600">cannot be
+                                    undone.</span>
+                            </p>
+                        </flux:text>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex justify-end gap-2">
+                    <flux:modal.close>
+                        <flux:button variant="ghost" wire:click="cancelDelete()"
+                            class="hover:bg-gray-100 focus:ring-2 focus:ring-offset-1 focus:ring-gray-300">
+                            Cancel
+                        </flux:button>
+                    </flux:modal.close>
+                    <flux:button type="submit" variant="danger" wire:click="confirmDelete()"
+                        wire:loading.attr="disabled" wire:target="confirmDelete"
+                        class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
+                        <span wire:loading.remove wire:target="confirmDelete">Delete Qualification</span>
+                        <span wire:loading wire:target="confirmDelete">Deleting...</span>
+                    </flux:button>
+                </div>
+            </div>
+        </flux:modal>
+    </div>
 </div>
+<script>
+    function getSelectedProfessionId() {
+        const selected = document.querySelectorAll('.profession-checkbox:checked');
+        if (selected.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'No Selection',
+                text: 'Please select an professional record.',
+                confirmButtonColor: '#3085d6',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return null;
+        }
+        if (selected.length > 1) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Multiple Selections',
+                text: 'Please select only one professional qualification.',
+                confirmButtonColor: '#d33',
+            });
+            return null;
+        }
+        return selected[0].value;
+    }
+    function handleEditClick() {
+        const professionId = getSelectedProfessionId();
+        if (professionId) {
+            @this.edit(professionId); // Calls Livewire method directly
+        }
+    }
+    function handleDeleteClick() {
+        const professionId = getSelectedProfessionId();
+        if (professionId) {
+            @this.delete(professionId); // Calls Livewire method directly
+        }
+    }
+</script>
