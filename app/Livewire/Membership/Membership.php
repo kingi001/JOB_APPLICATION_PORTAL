@@ -23,7 +23,7 @@ class Membership extends Component
     }
     public function delete($id)
     {
-        $membership = MembershipModel::findOrFail($this->membershipId);
+        $membership = MembershipModel::findOrFail($id);
         if ($membership->user_id !== Auth::id()) {
             abort(403);
         }
@@ -33,7 +33,7 @@ class Membership extends Component
     }
     public function confirmDelete()
     {
-        $membership = Membershipmodel::findOrFail($this->membershipId);
+        $membership = MembershipModel::findOrFail($this->membershipId);
 
         if ($membership->user_id !== Auth::id()) {
             abort(403);
