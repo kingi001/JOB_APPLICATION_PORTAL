@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Livewire\AcademicQualification;
+
+use Illuminate\Support\Facades\Storage;
 use App\Models\Education;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
@@ -39,10 +42,14 @@ class Academic extends Component
     public function confirmDelete()
     {
         $education = Education::findOrFail($this->educationId);
+        // Delete the academic document if it exists
+        if ($education->academic_document && Storage::disk('public')->exists($education->academic_document)) {
+            Storage::disk('public')->delete($education->academic_document);
+        }
         $education->delete();
         session()->flash('message', 'Academic qualification deleted successfully.');
         Flux::modal('delete-education')->close();
-        redirect()->route('education');
+        return redirect()->route('education');
     }
     public function cancelDelete()
     {

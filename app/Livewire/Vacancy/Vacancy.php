@@ -30,6 +30,7 @@ class Vacancy extends Component
                 $query->where(function ($q) {
                     $q->where('ref_no', 'like', '%' . $this->search . '%')
                         ->orWhere('position', 'like', '%' . $this->search . '%')
+                        ->orWhere('job_grade', 'like', '%' . $this->search . '%')
                         ->orWhere('requirements', 'like', '%' . $this->search . '%')
                         ->orWhere('duties', 'like', '%' . $this->search . '%');
                 });

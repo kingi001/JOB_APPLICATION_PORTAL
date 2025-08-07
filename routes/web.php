@@ -3,14 +3,16 @@ use App\Http\Controllers\ApplicantDashboardController;
 use App\Livewire\AcademicQualification\Academic;
 use App\Livewire\Applicant\PersonalInformation;
 use App\Livewire\Applications;
+use App\Livewire\Employment\Employment;
+use App\Livewire\Membership\Membership;
 use App\Livewire\ProfessionanlQualification\Professional;
 use App\Livewire\Screening;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Vacancy\Vacancy;
-use App\Livewire\Membership\Membership;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Vacancies', Vacancy::class)->name('vacancies');
     Route::get('AcademicQualification', Academic::class)->name('education');
     Route::get('ProfessionalQualification', Professional::class)->name('professional-qualification');
+    Route::get('Employment', Employment::class)->name('employment');
     Route::get('Applications', Applications::class)->name('applications');
     Route::get('Screening', Screening::class)->name('screening');
     Route::get('Membership', Membership::class)->name('membership');

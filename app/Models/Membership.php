@@ -19,9 +19,9 @@ class Membership extends Model
         'membership_document',
     ];
 
-    protected $dates = [
-        'date_renewed',
-        'expiry_date',
+    protected $casts= [
+        'date_renewed' => 'date',
+        'expiry_date'=> 'date',
     ];
 
     // Relationships

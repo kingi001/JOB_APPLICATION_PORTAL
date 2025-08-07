@@ -22,7 +22,6 @@ class AddAcademic extends Component
     ];
     public function submit()
     {
-        sleep(1); // Simulate a delay for demonstration purposes
         $this->validate();
         $filePath = null;
         if ($this->academic_document) {
@@ -42,9 +41,7 @@ class AddAcademic extends Component
         $this->reset(['institution', 'qualification', 'course', 'award', 'academic_document', 'start_date', 'end_date']);
         return redirect()->route('education');
     }
-    //SODE TO REMOVE VALIDATION ERROR WHEN DOCUMENT IS REMOVED
-    // This method is called when the user clicks the "Remove Document" button
-    // It sets the academic_document property to null and resets the validation error for that field
+
     public function removeDocument()
     {
         $this->academic_document = null;

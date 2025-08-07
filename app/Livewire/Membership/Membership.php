@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Livewire\Membership;
+
 use Livewire\Component;
 use Flux\Flux;
 use App\Models\Membership as MembershipModel; // Assuming you have a Membership model
 use Illuminate\Support\Facades\Auth;
+
 class Membership extends Component
 {
     public $membershipId;
