@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Livewire\AcademicQualification;
-
 use Illuminate\Support\Facades\Storage;
 use App\Models\Education;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
 class Academic extends Component
 {
     public $educationId;

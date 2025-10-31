@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Livewire\Employment;
-
 use App\Models\Employment as EmploymentModel;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
@@ -9,50 +7,59 @@ use Livewire\Component;
 
 class Employment extends Component
 {
-    public $employmentId;
-    public $selectedEmployment;
-
-    public $selectedId = null; // instead of public $selectedIds = [];
+    public  $employmentId;
+    public  $selectedEmployment ;
+    public array $selectedIds = [];
     public function render()
     {
-        $employment = EmploymentModel::where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view(
-            'livewire.employment.employment',
-            [
-                'employment' => $employment,
-            ]
-        );
+        $userId = Auth::id();
+
+        return view('livewire.employment.employment', [
+            'employment' => EmploymentModel::where('user_id', $userId)
+                ->orderBy('created_at')
+                ->get(),
+        ]);
     }
+
     public function edit($id)
     {
         $this->dispatch('edit-employment', $id);
     }
+
     public function delete($id)
     {
         $employment = EmploymentModel::findOrFail($id);
-        if ($employment->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorizeEmployment($employment);
+
         $this->employmentId = $employment->id;
-        $this->selectedEmployment = $employment->organization ?? 'Selected'; // Avoid undefined property
+        $this->selectedEmployment = $employment->organization ?? 'Selected';
         Flux::modal('delete-employment')->show();
     }
+
     public function confirmDelete()
     {
         $employment = EmploymentModel::findOrFail($this->employmentId);
+        $this->authorizeEmployment($employment);
 
-        if ($employment->user_id !== Auth::id()) {
-            abort(403);
-        }
         $employment->delete();
+
+        $this->reset(['employmentId', 'selectedEmployment']);
+        $this->dispatch('$refresh');
+
         session()->flash('message', 'Employment deleted successfully.');
         Flux::modal('delete-employment')->close();
     }
+
     public function cancelDelete()
     {
         $this->reset(['employmentId', 'selectedEmployment']);
         Flux::modal('delete-employment')->close();
+    }
+
+    private function authorizeEmployment($employment): void
+    {
+        if ($employment->user_id !== Auth::id()) {
+            abort(403);
+        }
     }
 }

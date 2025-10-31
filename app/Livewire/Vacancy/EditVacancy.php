@@ -58,16 +58,16 @@ class EditVacancy extends Component
             'terms_of_employment' => ['required', Rule::in(['Internship', 'Permanent', 'Contract', 'Attachment'])],
         ]);
         $vacancy = VacancyModel::findOrFail($this->vacancyId);
-        $vacancy->ref_no = $this->ref_no;
-        $vacancy->position = $this->position;
-        $vacancy->job_grade = $this->job_grade;
-        $vacancy->requirements = $this->requirements;
-        $vacancy->duties = $this->duties;
-        $vacancy->application_deadline = $this->application_deadline;
-        $vacancy->status = $this->status;
-        $vacancy->terms_of_employment = $this->terms_of_employment;
-        $vacancy->save();
-
+        $vacancy->update([
+            'ref_no' => $this->ref_no,
+            'position' => $this->position,
+            'job_grade' => $this->job_grade,
+            'requirements' => $this->requirements,
+            'duties' => $this->duties,
+            'application_deadline' => $this->application_deadline,
+            'status' => $this->status,
+            'terms_of_employment' => $this->terms_of_employment,
+        ]);
         //close the modal
         Flux::modal('edit-vacancy')->close();
         //flash message

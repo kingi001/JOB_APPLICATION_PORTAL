@@ -20,15 +20,27 @@
         </a>
 
 
-        <flux:navlist variant="outline" class="space-y-4">
+        <flux:navlist variant="outline" class="space-y-2 space-x-1" >
+            {{-- <flux:dropdown position="bottom" align="end">
+                <flux:profile avatar="/img/demo/user.png" name="My Profile" />
+
+                <flux:navmenu>
+                    <flux:navmenu.item href="#" icon="user">Account</flux:navmenu.item>
+                    <flux:navmenu.item href="#" icon="building-storefront">Profile</flux:navmenu.item>
+                    <flux:navmenu.item href="#" icon="credit-card">Billing</flux:navmenu.item>
+                    <flux:navmenu.item href="#" icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
+                    <flux:navmenu.item href="#" icon="trash" variant="danger">Delete</flux:navmenu.item>
+                </flux:navmenu>
+            </flux:dropdown> --}}
 
             {{-- E-recruitment --}}
-            <flux:navlist.group :heading="__('🧭 E-recruitment')" class="grid gap-1">
-                <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate
+            <flux:navlist.group :heading="__(' E-recruitment')" class="grid gap-1">
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate
                     class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
                     title="{{ __('Applicant Dashboard') }}">
-                    <i class="fas fa-home text-primary text-sm mr-3"></i>{{ __('Applicant Dashboard') }}
+                    <i class="fas fa-home text-primary text-sm mr-3"></i>{{ __('Admin Dashboard') }}
                 </flux:navlist.item>
+
 
                 <flux:navlist.item :href="route('vacancies')" :current="request()->routeIs('vacancies')" wire:navigate
                     class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
@@ -68,7 +80,12 @@
             </flux:navlist.group>
 
             {{-- Personal Profile --}}
-            <flux:navlist.group :heading="__('👤 Personal Profile')" class="grid gap-1">
+            <flux:navlist.group :heading="__(' Personal Profile')" class="grid gap-1">
+                 <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate
+                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                    title="{{ __('Applicant Dashboard') }}">
+                    <i class="fas fa-home text-primary text-sm mr-3"></i>{{ __('Applicant Dashboard') }}
+                </flux:navlist.item>
                 <flux:navlist.item :href="route('personal-information')"
                     :current="request()->routeIs('personal-information')" wire:navigate
                     class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
@@ -77,84 +94,76 @@
                 </flux:navlist.item>
             </flux:navlist.group>
 
-            {{-- Education --}}
-            <flux:navlist.group :heading="__('🎓 Education')" class="grid gap-1">
-                <flux:navlist.item :href="route('education')" :current="request()->routeIs('education')" wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Academic Qualifications') }}">
-                    <i class="fas fa-graduation-cap text-primary text-sm mr-3"></i>{{ __('Academic Qualifications') }}
-                </flux:navlist.item>
+            {{-- 🎓 Education Dropdown --}}
+            <flux:dropdown position="bottom" align="end">
+                <flux:button variant="ghost" size="sm" class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-primary"></i>
+                    <span>{{ __('Education') }}</span>
+                    <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
+                </flux:button>
 
-                <flux:navlist.item :href="route('professional-qualification')"
-                    :current="request()->routeIs('professional-qualification')" wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Professional Qualifications') }}">
-                    <i class="fas fa-certificate text-primary text-sm mr-3"></i>{{ __('Professional Qualifications') }}
-                </flux:navlist.item>
+                <flux:navmenu class="min-w-[220px]">
+                    <flux:navmenu.item :href="route('education')" icon="academic-cap"
+                        :current="request()->routeIs('education')" wire:navigate>
+                        {{ __('Academic Qualifications') }}
+                    </flux:navmenu.item>
 
-                <flux:navlist.item :href="route('membership')" :current="request()->routeIs('membership')" wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Membership to P.Bodies') }}">
-                    <i class="fas fa-id-badge text-primary text-sm mr-3"></i>{{ __('Membership to P.Bodies') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
+                    <flux:navmenu.item :href="route('professional-qualification')"
+                        :current="request()->routeIs('professional-qualification')" wire:navigate>
+                        {{ __('Professional Qualifications') }}
+                    </flux:navmenu.item>
+
+                    <flux:navmenu.item :href="route('membership')" :current="request()->routeIs('membership')"
+                        wire:navigate>
+                        {{ __('Membership to P.Bodies') }}
+                    </flux:navmenu.item>
+                </flux:navmenu>
+            </flux:dropdown>
 
             {{-- Employment History --}}
-            <flux:navlist.group :heading="__('💼 Employment History')" class="grid gap-1">
-                <flux:navlist.item :href="route('employment')" :current="request()->routeIs('employment')" wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Employment History') }}">
-                    <i class="fas fa-briefcase text-primary text-sm mr-3"></i>{{ __('Employment History') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
+
+            <flux:navlist.item :href="route('employment')" :current="request()->routeIs('employment')" wire:navigate
+                class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('Employment History') }}">
+                <i class="fas fa-briefcase text-primary text-sm mr-3"></i>{{ __('Employment History') }}
+            </flux:navlist.item>
+
 
             {{-- Referees --}}
-            <flux:navlist.group :heading="__('📇 Referees')" class="grid gap-1">
-                <flux:navlist.item wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Referees Details') }}">
-                    <i class="fas fa-user-friends text-primary text-sm mr-3"></i>{{ __('Referees Details') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
+            <flux:navlist.item :href="route('referee')" :current="request()->routeIs('referee')" wire:navigate
+                class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('Referees Details') }}">
+                <i class="fas fa-user-friends text-primary text-sm mr-3"></i>{{ __('Referees Details') }}
+            </flux:navlist.item>
 
             {{-- Documents --}}
-            <flux:navlist.group :heading="__('📤 Document Upload')" class="grid gap-1">
-                <flux:navlist.item wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Upload Documents') }}">
-                    <i class="fas fa-upload text-primary text-sm mr-3"></i>{{ __('Upload Documents') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
+            <flux:navlist.item wire:navigate class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('Document Upload') }}">
+                <i class="fas fa-upload text-primary text-sm mr-3"></i>{{ __('Upload Documents') }}
+            </flux:navlist.item>
 
             {{-- Application --}}
-            <flux:navlist.group :heading="__('📝 Application')" class="grid gap-1">
-                <flux:navlist.item wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Submit Application') }}">
-                    <i class="fas fa-paper-plane text-primary text-sm mr-3"></i>{{ __('Submit Application') }}
-                </flux:navlist.item>
+            <flux:navlist.item wire:navigate class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('Submit Application') }}">
+                <i class="fas fa-paper-plane text-primary text-sm mr-3"></i>{{ __('Submit Application') }}
+            </flux:navlist.item>
 
-                <flux:navlist.item wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('Status of My Application(s)') }}">
-                    <i class="fas fa-tasks text-primary text-sm mr-3"></i>{{ __('Status of My Application(s)') }}
-                </flux:navlist.item>
+            <flux:navlist.item wire:navigate class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('Status of My Application(s)') }}">
+                <i class="fas fa-tasks text-primary text-sm mr-3"></i>{{ __('Status of My Application(s)') }}
+            </flux:navlist.item>
 
-                <flux:navlist.item wire:navigate
-                    class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('My Offer Letters') }}">
-                    <i class="fas fa-envelope-open-text text-primary text-sm mr-3"></i>{{ __('My Offer Letters') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
+            <flux:navlist.item wire:navigate class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
+                title="{{ __('My Offer Letters') }}">
+                <i class="fas fa-envelope-open-text text-primary text-sm mr-3"></i>{{ __('My Offer Letters') }}
+            </flux:navlist.item>
 
             {{-- Notifications --}}
-            <flux:navlist.group :heading="__('🔔 Notifications')" class="grid gap-1">
                 <flux:navlist.item wire:navigate
                     class="transition-colors duration-200 hover:bg-gray-100 px-2 py-1 rounded"
-                    title="{{ __('My Notifications') }}">
+                    title="{{ __('Notifications') }}">
                     <i class="fas fa-bell text-primary text-sm mr-3"></i>{{ __('My Notifications') }}
                 </flux:navlist.item>
-            </flux:navlist.group>
 
             {{-- Courses --}}
             <flux:navlist.group :heading="__('📚 Courses')" class="grid gap-1">

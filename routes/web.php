@@ -6,12 +6,14 @@ use App\Livewire\Applications;
 use App\Livewire\Employment\Employment;
 use App\Livewire\Membership\Membership;
 use App\Livewire\ProfessionanlQualification\Professional;
+use App\Livewire\Referee\Referee;
 use App\Livewire\Screening;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Vacancy\Vacancy;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -32,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Applications', Applications::class)->name('applications');
     Route::get('Screening', Screening::class)->name('screening');
     Route::get('Membership', Membership::class)->name('membership');
+    Route::get('Referees', Referee::class)->name('referee');
 
     Route::redirect('settings', 'settings/profile');
     // Settings routes

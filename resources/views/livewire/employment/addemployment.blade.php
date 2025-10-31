@@ -1,5 +1,3 @@
-{{-- filepath: c:\Users\BAHATI_KINGI\Desktop\ICT
-PROJECTS\my-app\resources\views\livewire\employment\addemployment.blade.php --}}
 <div>
     <flux:modal name="add-employment" class="md:w-1000">
         <div class="space-y-6">

@@ -11,6 +11,7 @@
         </div>
     </div>
     <flux:separator variant="subtle" />
+
     {{-- Bread Crumbs --}}
     <div class="bg-gray-100 dark:bg-gray-800 py-0.5"> <!-- Reduced py-2 to py-1 -->
         <div class="mx-auto flex items-center text-xs text-gray-600 dark:text-gray-400">
