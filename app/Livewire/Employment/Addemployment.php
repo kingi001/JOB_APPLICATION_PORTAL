@@ -4,7 +4,6 @@ namespace App\Livewire\Employment;
 
 use App\Models\Employment as EmploymentModel;
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\Component;
 
 class Addemployment extends Component

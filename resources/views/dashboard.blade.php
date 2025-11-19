@@ -50,7 +50,7 @@
         </div>
 
         <!-- Stats Overview -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
             <div class="bg-white shadow rounded-xl p-5 border-l-4 border-blue-600">
                 <h3 class="text-sm text-gray-500">Total Applications</h3>
                 <p class="text-2xl font-bold text-blue-800">0</p>
@@ -281,7 +281,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-2">
+        {{-- <div class="py-2">
             <div class=" mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white shadow rounded-lg overflow-hidden">
                     <div class="p-1 flex items-center border-b border-gray-200">
@@ -330,6 +330,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 </x-layouts.app>

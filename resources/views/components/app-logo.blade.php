@@ -1,7 +1,10 @@
-<div class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-    {{-- <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" /> --}}
-    <img src="{{ asset('images/logo.png') }}" alt="BMA Logo" />
+<div class="flex items-center gap-2">
+    <!-- Logo -->
+    <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" class="h-15 w-auto">
+
+    <!-- Title -->
+    <div class="text-start text-sm">
+        <span class="font-bold text-indigo-700 text-md">JOBS PORTAL</span>
+    </div>
 </div>
-<div class="ms-1 grid flex-1 text-start text-sm">
-    <span class="mb-0.5 truncate leading-none font-semibold">BMA Jobs Portal</span>
-</div>
+

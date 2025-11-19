@@ -3,6 +3,7 @@ use App\Http\Controllers\ApplicantDashboardController;
 use App\Livewire\AcademicQualification\Academic;
 use App\Livewire\Applicant\PersonalInformation;
 use App\Livewire\Applications;
+use App\Livewire\DocumentsUpload\Docupload;
 use App\Livewire\Employment\Employment;
 use App\Livewire\Membership\Membership;
 use App\Livewire\ProfessionanlQualification\Professional;
@@ -13,7 +14,6 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Vacancy\Vacancy;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::get('/', function () {
@@ -35,12 +35,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Screening', Screening::class)->name('screening');
     Route::get('Membership', Membership::class)->name('membership');
     Route::get('Referees', Referee::class)->name('referee');
-
+    Route::get('DocumentsUpload', Docupload::class)->name('documents-upload');
     Route::redirect('settings', 'settings/profile');
     // Settings routes
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
-
 require __DIR__ . '/auth.php';

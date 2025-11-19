@@ -3,7 +3,6 @@
 namespace App\Livewire\Referee;
 use Flux\Flux;
 use Livewire\Attributes\On;
-use Illuminate\Validation\Rule;
 use App\Models\Referee;
 use Livewire\Component;
 
@@ -11,7 +10,7 @@ class Edit extends Component
 {
     public $refereeId, $full_name, $occupation, $postal_address, $postal_code, $city, $email, $phone_number, $years_known;
     #[On('edit-referee')]
-    public function editReferee($id){
+    public function edit($id){
         $referee = Referee::findOrFail($id);
         $this->refereeId = $referee->id;
         $this->full_name = $referee->full_name;
@@ -50,8 +49,5 @@ class Edit extends Component
         session()->flash('success', 'Referee updated successfully.');
         return redirect()->route('referee');
     }
-    public function render()
-    {
-        return view('livewire.referee.edit');
-    }
+
 }

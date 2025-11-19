@@ -23,7 +23,6 @@
                 </button>
             </div>
         @endif
-
         <div class="py-1 mt-2 container mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-lg bg-white">
             <div class="p-2 bg-white border-b border-gray-200 rounded-lg">
                 <h2 class="text-lg font-semibold text-indigo-700 flex items-center gap-1">
@@ -124,91 +123,150 @@
             </div>
         </div>
 
-        <div>
-            <flux:modal name="delete-employment" class="min-w-[22rem]">
-                <div class="space-y-6">
-                    <div class="flex items-start gap-3">
-                        <svg class="w-10 h-10 text-red-600 mt-1 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z" />
-                        </svg>
-                        <div>
-                            <flux:heading size="lg" class="text-red-700">Delete Employment?</flux:heading>
-                            <flux:text class="mt-2 text-sm text-gray-600">
-                                <p>Are you sure you want to delete the employment record for
-                                    <span class="font-semibold text-red-600">{{ $employmentId}}</span>?
-                                </p>
-                                <p class="mt-1">This action <span class="font-semibold text-red-600">cannot be
-                                        undone.</span></p>
-                            </flux:text>
-                        </div>
-                    </div>
-                    <div class="flex justify-end gap-2">
-                        <flux:modal.close>
-                            <flux:button variant="ghost" wire:click="cancelDelete()"
-                                class="hover:bg-gray-100 focus:ring-2 focus:ring-offset-1 focus:ring-gray-300">
-                                Cancel
-                            </flux:button>
-                        </flux:modal.close>
-                        <flux:button type="submit" variant="danger" wire:click="confirmDelete()"
-                            wire:loading.attr="disabled" wire:target="confirmDelete"
-                            class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
-                            <span wire:loading.remove wire:target="confirmDelete">Delete Employment</span>
-                            <span wire:loading wire:target="confirmDelete">Deleting...</span>
-                        </flux:button>
+        <flux:modal name="delete-employment" class="min-w-[22rem]">
+            <div class="space-y-6">
+                {{-- Header Section --}}
+                <div class="flex items-start gap-3">
+                    <svg class="w-10 h-10 text-red-600 mt-1 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z" />
+                    </svg>
+
+                    <div>
+                        <flux:heading size="lg" class="text-red-700">Delete Employment?</flux:heading>
+                        <flux:text class="mt-2 text-sm text-gray-600">
+                            <p>
+                                Are you sure you want to delete the employment record for
+                                <span class="font-semibold text-red-600">{{ $selectedEmployment }}</span>?
+                            </p>
+                            <p class="mt-1">
+                                This action
+                                <span class="font-semibold text-red-600">cannot be undone.</span>
+                            </p>
+                        </flux:text>
                     </div>
                 </div>
-            </flux:modal>
-        </div>
+
+                {{-- Action Buttons --}}
+                <div class="flex justify-end gap-2">
+                    {{-- Cancel button --}}
+                    <flux:button variant="ghost" wire:click="cancelDelete()"
+                        class="hover:bg-gray-100 focus:ring-2 focus:ring-offset-1 focus:ring-gray-300">
+                        Cancel
+                    </flux:button>
+
+                    {{-- Confirm Delete --}}
+                    <flux:button type="button" variant="danger" wire:click="confirmDelete()"
+                        wire:loading.attr="disabled" wire:target="confirmDelete"
+                        class="focus:ring-2 focus:ring-offset-1 focus:ring-red-400">
+                        <span wire:loading.remove wire:target="confirmDelete">Delete Employment</span>
+                        <span wire:loading wire:target="confirmDelete">Deleting...</span>
+                    </flux:button>
+                </div>
+            </div>
+        </flux:modal>
+
+        <script>
+            function getSelectedEmploymentId() {
+                const selected = document.querySelectorAll('.employment-checkbox:checked');
+
+                if (selected.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '<span style="font-size: 20px; font-weight: 600; color:#d97706;">No Employment Selected</span>',
+                        html: `
+        <p style="font-size: 14px; color:#555;">
+            Please select an employment record to proceed.
+        </p>
+    `,
+                        footer: `
+        <span style="color:#999; font-size: 12px;">
+            Select one record and try again.
+        </span>
+    `,
+
+                        // Button
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#2563eb',
+                        confirmButtonAriaLabel: 'Close this alert',
+
+                        // Aesthetic improvements
+                        background: '#ffffff',
+                        color: '#333',
+                        padding: '1.5rem 1.3rem',
+                        width: '22rem',
+                        showCloseButton: true,
+                        buttonsStyling: true,
+                        customClass: {
+                            popup: 'rounded-xl shadow-lg',
+                            confirmButton: 'rounded-md px-4 py-2'
+                        },
+
+                        // Blur background
+                        backdrop: `
+        rgba(0, 0, 0, 0.35)
+        left top
+        no-repeat
+        backdrop-filter: blur(4px)
+    `,
+
+                        // Animation
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown animate__faster'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp animate__faster'
+                        }
+                    });
+
+                    return null;
+                }
+
+                if (selected.length > 1) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Multiple selections detected',
+                        html: '<span>Please select only one employment record.</span>',
+                        footer: '<span style="color:#ccc; font-size: 11px;">Deselect extra selections and try again.</span>',
+                        showConfirmButton: false,
+                        timer: 4500,
+                        timerProgressBar: true,
+
+                        // Animation
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInRight'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutRight'
+                        },
+
+                        // Toast styling
+                        customClass: {
+                            popup: 'shadow-md rounded-md'
+                        }
+                    });
+
+                    return null;
+                }
+
+                return selected[0].value;
+            }
+
+            function handleEditClick() {
+                const employmentId = getSelectedEmploymentId();
+                if (employmentId) {
+                    Livewire.dispatch('edit-employment', { id: employmentId });
+                }
+            }
+
+            function handleDeleteClick() {
+                const employmentId = getSelectedEmploymentId();
+                if (employmentId) {
+                    @this.delete(employmentId);
+                }
+            }
+        </script>
 </div>
-<script>
-    function getSelectedEmploymentId() {
-        const selected = document.querySelectorAll('.employment-checkbox:checked');
-
-        if (selected.length === 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'No Employment Selected',
-                text: 'Please select an employment record to proceed.',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                footer: '<span style="color:#888;">Select one record and try again.</span>',
-                showClass: { popup: 'animate__animated animate__fadeInDown' },
-                hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-            });
-            return null;
-        }
-
-        if (selected.length > 1) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Multiple Selections Detected',
-                text: 'Please select only one employment record to proceed.',
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Got it!',
-                footer: '<span style="color:#888;">Deselect extra selections and try again.</span>',
-                showClass: { popup: 'animate__animated animate__fadeInDown' },
-                hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-            });
-            return null;
-        }
-
-        return selected[0].value;
-    }
-
-    function handleEditClick() {
-        const employmentId = getSelectedEmploymentId();
-        if (employmentId) {
-            Livewire.dispatch('edit-employment', { id: employmentId });
-        }
-    }
-
-    function handleDeleteClick() {
-        const employmentId = getSelectedEmploymentId();
-        if (employmentId) {
-            @this.call('delete', employmentId); // ✅ safer Livewire call
-        }
-    }
-</script>
-

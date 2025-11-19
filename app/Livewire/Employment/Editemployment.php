@@ -10,24 +10,15 @@ use Flux\Flux;
 
 class Editemployment extends Component
 {
-    public $employmentId;
-    public $designation;
-    public $organization;
-    public $job_scale;
-    public $duties;
-    public $start_date;
-    public $end_date;
-
+    public $employmentId, $designation, $organization, $job_scale, $duties, $start_date, $end_date;
     #[On('edit-employment')]
     public function editEmployment($id)
     {
         $employment = EmploymentModel::findOrFail($id);
-
         // ✅ Security check: ensure logged-in user owns this record
         if ($employment->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access');
         }
-
         $this->employmentId = $employment->id;
         $this->designation = $employment->designation;
         $this->organization = $employment->organization;
@@ -35,7 +26,6 @@ class Editemployment extends Component
         $this->duties = $employment->duties;
         $this->start_date = optional($employment->start_date)->format('Y-m-d');
         $this->end_date = optional($employment->end_date)->format('Y-m-d');
-
         Flux::modal('edit-employment')->show();
     }
 
@@ -56,7 +46,6 @@ class Editemployment extends Component
         if ($employment->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access');
         }
-
         $employment->update([
             'designation' => $this->designation,
             'organization' => $this->organization,
@@ -67,19 +56,7 @@ class Editemployment extends Component
         ]);
 
         session()->flash('message', 'Employment updated successfully!');
-        $this->reset([
-            'employmentId',
-            'designation',
-            'organization',
-            'job_scale',
-            'duties',
-            'start_date',
-            'end_date',
-        ]);
-
         Flux::modal('edit-employment')->close();
-
-        // ✅ Instead of full redirect, just refresh component to improve UX
-        $this->dispatch('employment-updated'); // optional event to refresh list
+        return redirect()->route('employment');
     }
 }

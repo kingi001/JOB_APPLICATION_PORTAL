@@ -9,39 +9,76 @@ use Livewire\Component;
 
 class Referee extends Component
 {
-    public $refereeId;
+    public $refereeId, $full_name, $occupation, $postal_address, $postal_code, $city, $email, $phone_number, $years_known;
     public $selectedName;
-    public function render()
-    {
-        $userId = Auth::id();
-        return view('livewire.referee.referee', [
-            'referee' => Refereemodel::where('user_id', $userId)
-                ->orderBy('created_at')
-                ->get(),
-        ]);
-    }
+
     public function edit($id)
     {
-        $this->dispatch('edit-referee', $id);
+        $referee = RefereeModel::findOrFail($id);
+        $this->refereeId = $referee->id;
+        $this->full_name = $referee->full_name;
+        $this->occupation = $referee->occupation;
+        $this->postal_address = $referee->postal_address;
+        $this->postal_code = $referee->postal_code;
+        $this->city = $referee->city;
+        $this->email = $referee->email;
+        $this->phone_number = $referee->phone_number;
+        $this->years_known = $referee->years_known;
+        Flux::modal('edit-referee')->show();
+    }
+        public function update(){
+        $this->validate([
+            'full_name' => 'required|string|max:255',
+            'occupation' => 'required|string|max:255',
+            'postal_address' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:20',
+            'city' => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
+            'years_known' => 'required|integer|min:0',
+        ]);
+        $referee = RefereeModel::findOrFail($this->refereeId);
+        $referee->update([
+            'full_name' => $this->full_name,
+            'occupation' => $this->occupation,
+            'postal_address' => $this->postal_address,
+            'postal_code' => $this->postal_code,
+            'city' => $this->city,
+            'email' => $this->email,
+            'phone_number' => $this->phone_number,
+            'years_known' => $this->years_known,
+        ]);
+        Flux::modal('edit-referee')->close();
+        session()->flash('success', 'Referee updated successfully.');
+        return redirect()->route('referee');
     }
     public function delete($id)
     {
-        $referee = Refereemodel::findOrFail($id);
+        $referee = RefereeModel::findOrFail($id);
         $this->refereeId = $referee->id;
-        //display the modal with the referee details
         $this->selectedName = $referee->full_name;
         Flux::modal('delete-referee')->show();
     }
     public function confirmDelete()
     {
-        $referee = Refereemodel::findOrFail($this->refereeId);
+        $referee = RefereeModel::findOrFail($this->refereeId);
         $referee->delete();
         Flux::modal('delete-referee')->close();
-        $this->dispatch('referee-deleted');
+        session()->flash('success', 'Referee deleted successfully.');
+        return redirect()->route('referee');
     }
     public function cancelDelete()
     {
         $this->reset(['refereeId', 'selectedName']);
         Flux::modal('delete-referee')->close();
+    }
+        public function render()
+    {
+        $userId = Auth::id();
+        return view('livewire.referee.referee', [
+            'referee' => RefereeModel::where('user_id', $userId)
+                ->orderBy('created_at')
+                ->get(),
+        ]);
     }
 }

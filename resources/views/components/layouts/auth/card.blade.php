@@ -2,33 +2,32 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
-
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-neutral-100 antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900"  style="background-image: url('{{ asset('images/bgpattern.gif') }}');
-       background-repeat: repeat;
-       background-attachment: fixed;">
-    <div class="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-        <div class="flex w-full max-w-md flex-col gap-6">
-            <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 font-medium" wire:navigate>
-                <span class="flex h-9 w-9 items-center justify-center rounded-md">
-                    <x-app-logo-icon class="size-9 fill-current text-black dark:text-white" />
-                </span>
+<body class="min-h-screen antialiased bg-neutral-100 dark:bg-gradient-to-b dark:from-neutral-950 dark:to-neutral-900"
+      style="background-image: url('{{ asset('images/bgpattern.gif') }}'); background-repeat: repeat; background-attachment: fixed;">
 
-                <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
-            </a>
+    <div class="flex flex-col min-h-screen items-center justify-center px-4 md:px-10 py-6 gap-8">
 
-            <div class="flex flex-col gap-6">
-                <div
-                    class="rounded-xl border bg-white dark:bg-stone-950 dark:border-stone-800 text-stone-800 shadow-xs">
-                    <div class="px-10 py-8">{{ $slot }}</div>
-                </div>
-            </div>
+        <!-- Logo & Branding -->
+        <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 font-semibold text-gray-900 dark:text-white" wire:navigate>
+            <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" class="h-14 w-auto">
+            <span class="text-xl md:text-2xl tracking-wide">Bandar Maritime Academy Jobs Portal</span>
+        </a>
+
+        <!-- Card / Form Container -->
+        <div class="w-full max-w-md bg-white dark:bg-stone-950 border border-gray-200 dark:border-stone-800 rounded-2xl shadow-lg p-8">
+            {{ $slot }}
+        </div>
+
+        <!-- Optional Footer -->
+        <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+            &copy; {{ date('Y') }} Bandar Maritime Academy. All rights reserved.
         </div>
     </div>
-    @fluxScripts
 
+    @fluxScripts
 
 </body>
 

@@ -6,7 +6,6 @@
                 <flux:heading size="lg">Edit Employment</flux:heading>
                 <flux:text class="mt-2">Update your employment details below.</flux:text>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <flux:input label="Designation" size="sm" name="designation" placeholder="e.g. Software Engineer"
                     wire:model.defer="designation" />
@@ -16,10 +15,9 @@
 
                 <flux:input label="Organization" size="sm" name="organization" placeholder="e.g. ABC Company"
                     wire:model.defer="organization" />
-
             </div>
             <flux:textarea label="Duties" size="sm" name="duties" placeholder="e.g. System development, support"
-                    wire:model.defer="duties" rows="7" />
+                wire:model.defer="duties" rows="7" />
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <flux:input label="Start Date" size="sm" type="date" name="start_date" wire:model.defer="start_date" />
@@ -27,7 +25,6 @@
                 <flux:input label="End Date (leave blank if current)" size="sm" type="date" name="end_date"
                     wire:model.defer="end_date" />
             </div>
-
             <div class="flex">
                 <flux:spacer />
                 <flux:button size="sm" type="submit" variant="primary" wire:click="update">Update</flux:button>
