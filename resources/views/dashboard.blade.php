@@ -1,5 +1,26 @@
 <x-layouts.app :title="__('Dashboard')">
     <div>
+        @if (session('success'))
+            <div x-data="{ show: true }" x-show="show" x-transition:enter="transition ease-out duration-500"
+                x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-2" x-init="setTimeout(() => show = false, 3000)"
+                class="fixed top-6 right-6 w-full max-w-sm bg-white border-l-4 border-green-500 text-green-800 p-3 rounded-lg shadow-lg flex items-start space-x-3 z-50"
+                role="alert">
+                <svg class="w-6 h-6 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm">Success</p>
+                    <p class="text-sm">{{ session('success') }}</p>
+                </div>
+                <button @click="show = false" class="text-green-400 hover:text-green-600 focus:outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        @endif
         <div class="flex items-center space-x-4 mb-1">
             <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" />
             <div>
@@ -132,7 +153,7 @@
                                                 @endphp
                                                 <span
                                                     class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full border
-                                                                    {{ $isOpen ? 'text-green-800 bg-green-200 border-green-300 hover:bg-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
+                                                                            {{ $isOpen ? 'text-green-800 bg-green-200 border-green-300 hover:bg-green-300' : 'text-red-800 bg-red-100 border-red-300' }}">
                                                     <i class="fas {{ $isOpen ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                                     {{ ucfirst($vacancy->status) }}
                                                 </span>
@@ -183,7 +204,7 @@
                                     <h3 class="font-bold text-blue-800">{{ $vacancy->position }}</h3>
                                     <span
                                         class="text-xs px-2 py-1 rounded-full border
-                                                        {{ strtolower($vacancy->status) === 'open' ? 'text-green-700 bg-green-100 border-green-300' : 'text-red-700 bg-red-100 border-red-300' }}">
+                                                                {{ strtolower($vacancy->status) === 'open' ? 'text-green-700 bg-green-100 border-green-300' : 'text-red-700 bg-red-100 border-red-300' }}">
                                         <i
                                             class="fas {{ strtolower($vacancy->status) === 'open' ? 'fa-check-circle' : 'fa-times-circle' }}"></i>
                                         {{ ucfirst($vacancy->status) }}

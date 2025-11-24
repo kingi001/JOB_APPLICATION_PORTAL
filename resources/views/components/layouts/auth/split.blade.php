@@ -9,7 +9,6 @@
 </head>
 
 <body class="min-h-screen bg-white antialiased dark:bg-gradient-to-b dark:from-neutral-950 dark:to-neutral-900">
-
     <div
         class="relative grid h-screen flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
 
@@ -18,51 +17,29 @@
             class="relative hidden h-full flex-col p-10 lg:flex overflow-hidden rounded-tr-3xl dark:border-e dark:border-neutral-800">
 
             <!-- Background Image -->
-            <img src="{{ asset('images/left.webp') }}" alt="BMA Background"
+            <img src="{{ asset('images/test2.jpg') }}" alt="BMA Background"
                 class="absolute inset-0 h-full w-full  object-center opacity-100 z-0">
 
             <!-- Branding -->
             <a href="{{ route('home') }}" class="relative z-20 flex items-center gap-3 text-lg font-semibold">
-                <img src="{{ asset('images/web-logo.png') }}" alt="BMA Logo" class="h-12 w-auto">
+                <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" />
                 <span class="text-white text-xl font-bold">BMA Jobs Portal</span>
             </a>
-
-            <!-- Inspirational Quote -->
-            {{-- @php
-            [$message, $author] = str(Illuminate\Foundation\Inspiring::quotes()->random())->explode('-');
-            @endphp
-            <div class="relative z-20 mt-auto text-white">
-                <blockquote class="space-y-4 text-lg italic leading-relaxed">
-                    &ldquo;{{ trim($message) }}&rdquo;
-                    <footer class="mt-2 font-semibold text-sm text-indigo-200">{{ trim($author) }}</footer>
-                </blockquote>
-            </div> --}}
-
-            <!-- Decorative Element (Optional) -->
-            {{-- <div class="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl z-10"></div> --}}
         </div>
-
-
         <!-- Right Panel: Login / Form -->
         <div class="w-full lg:p-8 flex items-center justify-center">
             <div class="mx-auto w-full max-w-sm flex-col justify-center space-y-6 sm:w-[350px]">
-
                 <!-- Logo for small screens -->
-                <a href="{{ route('home') }}" class="z-20 flex flex-col items-center gap-2 font-medium "
-                    wire:navigate>
-                    <img src="{{ asset('images/web-logo.png') }}" alt="BMA Logo" class="h-12 w-auto">
+                <a href="{{ route('home') }}" class="z-20 flex flex-col items-center gap-2 font-medium " wire:navigate>
+                    <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" />
                     <span class="sr-only">BMA Jobs Portal</span>
                 </a>
-
                 <!-- Slot for login/register form -->
                 {{ $slot }}
-
             </div>
         </div>
-
     </div>
 
     @fluxScripts
 </body>
-
 </html>

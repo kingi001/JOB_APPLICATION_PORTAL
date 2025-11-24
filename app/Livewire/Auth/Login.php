@@ -39,10 +39,10 @@ class Login extends Component
                 'email' => __('auth.failed'),
             ]);
         }
+        session()->flash('success', value: 'Login successful!');
 
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
-
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
 

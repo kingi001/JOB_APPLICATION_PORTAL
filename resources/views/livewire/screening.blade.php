@@ -66,7 +66,10 @@
 
                 <!-- Edit Mode -->
                 @if ($editing)
-                    <form wire:submit.prevent="saveRequirements" class="space-y-4 text-sm text-gray-700">
+                    <form wire:submit.prevent="saveRequirements"
+                        class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-700">
+
+                        <!-- Minimum Education -->
                         <div>
                             <label class="font-medium text-gray-800">Minimum Education</label>
                             <flux:select id="education" wire:model.defer="education" class="mt-1 w-full">
@@ -84,16 +87,53 @@
                             @error('education') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
+                        <!-- Minimum Experience -->
                         <div>
-                            <label class="font-medium text-gray-800">Minimum Experience</label>
-                            <flux:input type="text" id="experience" wire:model.defer="experience" class="mt-1 w-full" />
-
+                            <label class="font-medium text-gray-800">Minimum Experience (Years)</label>
+                            <flux:input type="number" min="0" id="experience" wire:model.defer="experience"
+                                class="mt-1 w-full" />
                             @error('experience') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
-                        <div class="col-span-2">
-                            <label class="font-medium text-gray-800">Required Documents (comma separated)</label>
-                            <div class="mt-2 space-y-2">
+                        <!-- Minimum Age -->
+                        <div>
+                            <label class="font-medium text-gray-800">Minimum Age</label>
+                            <flux:input type="number" min="18" id="age" wire:model.defer="age" class="mt-1 w-full" />
+                            @error('age') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Gender Preference -->
+                        <div>
+                            <label class="font-medium text-gray-800">Gender Preference</label>
+                            <flux:select id="gender" wire:model.defer="gender" class="mt-1 w-full">
+                                <option value="">-- Select Gender --</option>
+                                <option value="Any">Any</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </flux:select>
+                            @error('gender') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Certifications -->
+                        <div>
+                            <label class="font-medium text-gray-800">Required Certifications</label>
+                            <flux:input type="text" id="certifications" wire:model.defer="certifications"
+                                placeholder="Comma separated" class="mt-1 w-full" />
+                            @error('certifications') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Languages -->
+                        <div>
+                            <label class="font-medium text-gray-800">Languages Required</label>
+                            <flux:input type="text" id="languages" wire:model.defer="languages"
+                                placeholder="Comma separated" class="mt-1 w-full" />
+                            @error('languages') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Required Documents -->
+                        <div class="md:col-span-3">
+                            <label class="font-medium text-gray-800">Required Documents</label>
+                            <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                                 @foreach ($availableDocuments as $doc)
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" wire:model.defer="documents" value="{{ $doc }}"
@@ -102,15 +142,27 @@
                                     </label>
                                 @endforeach
                             </div>
+                            @error('documents') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
-                        <div class="flex justify-end">
+                        <!-- Other Skills -->
+                        <div class="md:col-span-3">
+                            <label class="font-medium text-gray-800">Other Skills / Competencies</label>
+                            <flux:textarea wire:model.defer="skills" rows="3"
+                                placeholder="Optional: List any other skills or competencies" class="mt-1 w-full" />
+                            @error('skills') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="md:col-span-3 flex justify-end">
                             <button type="submit"
-                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center gap-1">
-                                <i class="fas fa-save text-sm"></i> Save Requirements
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center gap-2">
+                                <i class="fas fa-magnifying-glass text-sm"></i> Screen Analysis
                             </button>
+
                         </div>
                     </form>
+
                 @endif
             </div>
 
@@ -291,7 +343,7 @@
                 <!-- Reports Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach($reports as $report)
-                        <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
+                        <div class="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h4 class="text-md font-semibold text-gray-800 flex items-center gap-1">

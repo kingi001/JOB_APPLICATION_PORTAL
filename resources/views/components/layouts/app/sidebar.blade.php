@@ -11,7 +11,7 @@
 <body class="min-h-screen bg-gray-50 dark:bg-zinc-800" style="background-image: url('{{ asset('images/bgpattern.gif') }}');
        background-repeat: repeat;
        background-attachment: fixed;">
-    <flux:sidebar sticky stashable class="border-e border-blue-200 bg-blue-50 dark:border-blue-700 dark:bg-blue-900">
+    <flux:sidebar sticky stashable class="border-e border-blue-200 bg-blue-100 dark:border-blue-700 dark:bg-blue-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>

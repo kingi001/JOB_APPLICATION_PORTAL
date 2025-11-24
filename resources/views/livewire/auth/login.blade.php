@@ -4,27 +4,12 @@
     <x-auth-session-status class="text-center" :status="session('status')" />
     <form wire:submit="login" class="flex flex-col gap-4">
         <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-            class="text-sm"
-        />
+        <flux:input wire:model="email" :label="__('Email address')" type="email" required autofocus autocomplete="email"
+            placeholder="email@example.com" class="text-sm" />
         <!-- Password -->
         <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-                viewable
-            />
+            <flux:input wire:model="password" :label="__('Password')" type="password" required
+                autocomplete="current-password" :placeholder="__('Password')" viewable />
             @if (Route::has('password.request'))
                 <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
                     {{ __('Forgot your password?') }}
