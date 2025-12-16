@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('application_letter');
-            $table->string('national_id');
+            $table->string('application_letter')->nullable();
+            $table->string('national_id')->nullable();
             $table->string('testimonials')->nullable();
             $table->timestamps();
         });

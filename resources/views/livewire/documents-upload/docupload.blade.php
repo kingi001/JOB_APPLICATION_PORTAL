@@ -1,9 +1,6 @@
 <div class="space-y-8">
-
     <livewire:header />
-
     <div class="py-4 mt-4 container mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-xl shadow-md bg-white">
-
         <!-- Section Header -->
         <div class="p-4 border-b border-gray-200 bg-white rounded-t-xl">
             <h3 class="text-lg font-bold text-indigo-800 flex items-center gap-2">
@@ -14,7 +11,6 @@
                 Upload all required documents for your application. Only PDF files are accepted.
             </p>
         </div>
-
         <!-- Upload Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
 
@@ -69,7 +65,7 @@
                         </button>
                     </div>
                 @elseif($existingDocuments && $existingDocuments->application_letter)
-                    <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg shadow-sm mt-3">
+                    <div class="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm mt-3">
                         <div class="flex flex-col">
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-file-pdf text-red-600 text-lg"></i>
@@ -111,7 +107,7 @@
 
                     <div class="flex flex-col items-center justify-center pointer-events-none">
                         <i class="fas fa-id-card text-indigo-600 text-3xl mb-2"></i>
-                        <span class="font-medium text-gray-700 text-center">
+                        <span class="font-medium text-gray-700 text-center text-sm">
                             Click or drag to upload National ID / Passport
                         </span>
                     </div>
@@ -145,7 +141,7 @@
                         </button>
                     </div>
                 @elseif ($existingDocuments && $existingDocuments->national_id)
-                    <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg shadow-sm mt-3">
+                    <div class="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm mt-3">
                         <div class="flex flex-col">
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-file-pdf text-red-600 text-lg"></i>
@@ -187,7 +183,7 @@
 
                     <div class="flex flex-col items-center justify-center pointer-events-none">
                         <i class="fas fa-file-pdf text-indigo-600 text-3xl mb-2"></i>
-                        <span class="font-medium text-gray-700 text-center">
+                        <span class="font-medium text-gray-700 text-center text-sm">
                             Click or drag to upload Testimonials
                         </span>
                     </div>
@@ -228,13 +224,13 @@
                 <!-- Existing uploaded testimonials -->
                 @if($existingDocuments && $existingDocuments->testimonials)
                     @foreach(json_decode($existingDocuments->testimonials) as $index => $file)
-                        <div class="flex items-center justify-between bg-gray-100 p-3 rounded-lg shadow-sm mt-3">
+                        <div class="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm mt-3">
                             <div class="flex flex-col">
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-file-pdf text-red-600 text-lg"></i>
                                     <a href="{{ Storage::url($file) }}" target="_blank"
                                        class="font-medium text-indigo-600 underline">
-                                        {{ basename($file) }}
+                                        View Uploaded Testimonial
                                     </a>
                                 </div>
                                 <span class="text-xs text-gray-500 mt-1">

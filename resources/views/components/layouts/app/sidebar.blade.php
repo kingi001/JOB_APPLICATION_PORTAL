@@ -11,7 +11,7 @@
 <body class="min-h-screen bg-gray-50 dark:bg-zinc-800" style="background-image: url('{{ asset('images/bgpattern.gif') }}');
        background-repeat: repeat;
        background-attachment: fixed;">
-    <flux:sidebar sticky stashable class="border-e border-blue-200 bg-blue-100 dark:border-blue-700 dark:bg-blue-900">
+    <flux:sidebar sticky stashable class="border-e border-blue-100 bg-blue-100 dark:border-blue-700 dark:bg-blue-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
@@ -48,13 +48,11 @@
                         <i class="fas fa-search text-primary text-sm"></i>
                         <span>{{ __('Screening') }}</span>
                     </flux:navlist.item>
-
                     <flux:navlist.item wire:navigate
                         class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
                         <i class="fas fa-user-check text-primary text-sm"></i>
                         <span>{{ __('Shortlisting') }}</span>
                     </flux:navlist.item>
-
                     <flux:navlist.item wire:navigate
                         class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
                         <i class="fas fa-comments text-primary text-sm"></i>
@@ -77,9 +75,7 @@
                         <span>{{ __('Personal Information') }}</span>
                     </flux:navlist.item>
                 </flux:navlist.group>
-
                 <flux:navlist.group heading="Education" expandable icon="fas fa-graduation-cap">
-
                     <flux:navlist.item :href="route('education')" :current="request()->routeIs('education')"
                         wire:navigate>
                         {{ __('Academic Qualifications') }}
@@ -94,43 +90,7 @@
                         wire:navigate>
                         {{ __('Membership to P.Bodies') }}
                     </flux:navlist.item>
-
                 </flux:navlist.group>
-
-
-                {{-- 🎓 Education (Collapsible Dropdown) --}}
-                {{-- <div>
-                    <button @click="openEducation = !openEducation"
-                        class="w-full flex items-center justify-between px-2 py-1 rounded-md hover:bg-indigo-50 transition-all duration-200">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-graduation-cap text-primary text-sm"></i>
-                            <span class="text-sm">{{ __('Education') }}</span>
-                        </div>
-                        <i
-                            :class="openEducation ? 'fas fa-chevron-up text-gray-500 text-xs' : 'fas fa-chevron-down text-gray-500 text-xs'"></i>
-                    </button>
-
-                    <div x-show="openEducation" x-collapse class="mt-1 ml-6 space-y-1">
-                        <flux:navlist.item :href="route('education')" :current="request()->routeIs('education')"
-                            wire:navigate
-                            class="flex items-center gap-2 px-2 py-1 rounded hover:bg-indigo-50 transition-all duration-200">
-                            {{ __('Academic Qualifications') }}
-                        </flux:navlist.item>
-
-                        <flux:navlist.item :href="route('professional-qualification')"
-                            :current="request()->routeIs('professional-qualification')" wire:navigate
-                            class="flex items-center gap-2 px-2 py-1 rounded hover:bg-indigo-50 transition-all duration-200">
-                            {{ __('Professional Qualifications') }}
-                        </flux:navlist.item>
-
-                        <flux:navlist.item :href="route('membership')" :current="request()->routeIs('membership')"
-                            wire:navigate
-                            class="flex items-center gap-2 px-2 py-1 rounded hover:bg-indigo-50 transition-all duration-200">
-                            {{ __('Membership to P.Bodies') }}
-                        </flux:navlist.item>
-                    </div>
-                </div> --}}
-
                 {{-- 💼 Employment History --}}
                 <flux:navlist.item :href="route('employment')" :current="request()->routeIs('employment')" wire:navigate
                     class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
@@ -156,7 +116,7 @@
                 <flux:navlist.item wire:navigate
                     class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
                     <i class="fas fa-paper-plane text-primary text-sm"></i>
-                    <span>{{ __('Apply Job') }}</span>
+                    <span>{{ __('Submit Application') }}</span>
                 </flux:navlist.item>
 
                 <flux:navlist.item wire:navigate
@@ -165,12 +125,6 @@
                     <span>{{ __('Status of My Application(s)') }}</span>
                 </flux:navlist.item>
 
-                {{-- <flux:navlist.item wire:navigate
-                    class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
-                    <i class="fas fa-envelope-open-text text-primary text-sm"></i>
-                    <span>{{ __('My Offer Letters') }}</span>
-                </flux:navlist.item> --}}
-
                 {{-- 🔔 Notifications --}}
                 <flux:navlist.item wire:navigate
                     class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
@@ -178,26 +132,30 @@
                     <span>{{ __('Notifications') }}</span>
                 </flux:navlist.item>
 
-                {{-- 📚 Courses --}}
-                {{-- <flux:navlist.group :heading="__('Courses')" class="grid gap-1">
-                    <flux:navlist.item wire:navigate
-                        class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
-                        <i class="fas fa-book-open text-primary text-sm"></i>
-                        <span>{{ __('View Courses') }}</span>
+                <flux:spacer />
+                <flux:navlist.group heading="Security & Control" expandable icon="fas fa-graduation-cap">
+                    <flux:navlist.item :href="route('education')" :current="request()->routeIs('education')"
+                        wire:navigate>
+                        {{ __('Users') }}
                     </flux:navlist.item>
-                </flux:navlist.group> --}}
+
+                    <flux:navlist.item :href="route('professional-qualification')"
+                        :current="request()->routeIs('professional-qualification')" wire:navigate>
+                        {{ __('Roles') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item :href="route('membership')" :current="request()->routeIs('membership')"
+                        wire:navigate>
+                        {{ __('Authentication') }}
+                    </flux:navlist.item>
+                </flux:navlist.group>
             </flux:navlist>
         </div>
-
-
         <flux:spacer />
-
-
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">
             <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
                 icon-trailing="chevrons-up-down" />
-
             <flux:menu class="w-[220px]">
                 <flux:menu.radio.group>
                     <div class="p-0 text-sm font-normal">

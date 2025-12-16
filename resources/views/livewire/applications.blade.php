@@ -2,19 +2,30 @@
     <livewire:header />
     <div class="py-1 mt-2 container mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-lg bg-white">
         <div class="p-2 bg-white border-b border-gray-200 rounded-lg">
-            <!-- Section Title -->
-            <h2 class="text-lg font-semibold text-indigo-700 flex items-center gap-1">
-                <i class="fas fa-users text-indigo-800 text-xl"></i>
-                {{ __('Applications Received') }}
-            </h2>
+            <div class="flex items-center justify-between">
+                <!-- Section Title -->
+                <h2 class="text-base font-semibold text-indigo-700 flex items-center gap-1">
+                    <i class="fas fa-users text-indigo-800 text-xl"></i>
+                    {{ __('Applications Received') }}
+                </h2>
+
+                <!-- Statement (Right aligned) -->
+                {{-- <p class="text-sm text-gray-600 leading-relaxed text-right max-w-full">
+                    Below is a summary of applications submitted.
+                    <span class="font-medium text-indigo-600">
+                        This includes applicant details and document submission status.
+                    </span>
+                </p> --}}
+            </div>
         </div>
 
-        <div class="px-4 py-3">
+
+        {{-- <div class="px-4 py-3">
             <p class="text-sm text-gray-600 leading-relaxed">
                 Below is a summary of applications submitted. <span class="font-medium text-indigo-600">This includes
                     applicant details and document submission status.</span>
             </p>
-        </div>
+        </div> --}}
 
         <!-- TABLE -->
         <div>
@@ -31,7 +42,7 @@
                     </p>
                 </div>
             @else
-                <div class="overflow-x-auto mt-4">
+                <div class="overflow-x-auto mt-2">
                     <table class="min-w-full bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
                         <thead class="bg-indigo-50 text-indigo-800 uppercase text-xs font-semibold tracking-wider">
                             <tr>
@@ -53,8 +64,8 @@
                         <tbody class="text-gray-700 text-sm divide-y divide-gray-200">
                             @foreach ($applications as $index => $app)
                                 <tr>
-                                    <td class="px-4 py-3 whitespace-nowrap">{{ $index + 1 }}</td>
-                                    <td class="px-4 py-3 text-gray-800 whitespace-nowrap">
+                                    <td class="px-4 py-2 whitespace-nowrap">{{ $index + 1 }}</td>
+                                    <td class="px-4 py-2 text-gray-800 whitespace-nowrap">
                                         <input type="checkbox" wire:model="selectedIds" name="education_ids[]"
                                             class="education-checkbox form-checkbox rounded-sm h-3 w-3 text-indigo-600">
                                     </td>
@@ -88,7 +99,7 @@
                                     <td class="px-4 py-2">
                                         <span
                                             class="text-xs px-2 py-1 rounded-full font-semibold
-                                                                {{ $app['status'] === 'Complete' ? 'bg-green-200 text-green-900' : 'bg-yellow-200 text-yellow-900' }}">
+                                                                        {{ $app['status'] === 'Complete' ? 'bg-green-200 text-green-900' : 'bg-yellow-200 text-yellow-900' }}">
                                             {{ $app['status'] }}
                                         </span>
                                     </td>

@@ -11,7 +11,6 @@ class ApplicantDashboardController extends Controller
      public function index()
     {
         $userId = Auth::id();
-
         $vacancies = Vacancy::where('user_id', $userId)->latest()->paginate(10);
         return view('dashboard', compact(
             'vacancies'
