@@ -3,15 +3,14 @@
     {{-- Notifications Component --}}
     @foreach (['success' => 'green', 'error' => 'red'] as $type => $color)
         @if (session($type))
-            <div x-data="{ show: true, progress: 100 }" x-show="show" x-init="
-                                                        let interval = setInterval(() => { progress -= 0.5; if(progress <= 0){ show = false; clearInterval(interval); } }, 15);
-                                                     " x-transition:enter="transform transition ease-out duration-500"
+            <div x-data="{ show: true, progress: 100 }" x-show="show"
+                x-init="                                                                                        let interval = setInterval(() => { progress -= 0.5; if(progress <= 0){ show = false; clearInterval(interval); } }, 15);                                                               "
+                x-transition:enter="transform transition ease-out duration-500"
                 x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
                 x-transition:leave="transform transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4"
                 class="fixed top-6 right-6 w-full max-w-sm bg-white border-l-4 border-{{ $color }}-500 text-{{ $color }}-800 p-4 rounded-lg shadow-lg flex flex-col space-y-2 z-50"
                 role="alert">
-
                 <div class="flex items-start justify-between">
                     <div class="flex items-center space-x-3">
                         <svg class="w-6 h-6 text-{{ $color }}-500 shrink-0" fill="none" stroke="currentColor"
@@ -34,7 +33,6 @@
                         </svg>
                     </button>
                 </div>
-
                 {{-- Optional Auto-dismiss Progress Bar --}}
                 <div class="h-1 w-full bg-{{ $color }}-100 rounded-full overflow-hidden">
                     <div class="h-1 bg-{{ $color }}-500 rounded-full" :style="'width: ' + progress + '%;'"></div>
@@ -42,32 +40,25 @@
             </div>
         @endif
     @endforeach
-
-    <div class="py-6 container max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 container max-width mx-auto sm:px-6 lg:px-2">
         <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-md">
-
             {{-- Section Header --}}
-            <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <div class="flex items-center justify-between border-b  mb-3">
                 <h2 class="text-base font-semibold text-indigo-700 flex items-center gap-2">
                     <i class="fas fa-file-alt"></i> {{ __('Job Application') }}
                 </h2>
                 <span class="text-sm text-indigo-600">{{ now()->format('F j, Y') }}</span>
             </div>
-
             <p class="text-sm text-gray-600">
                 Select the job you want to apply for and submit your application.
             </p>
-
-
             {{-- Application Form --}}
-            <div class="mt-5 space-y-4">
-
-
+            <div class="mt-3 space-y-4">
                 {{-- Job Selection --}}
                 <div>
-                    <flux:label>Select Job Position</flux:label>
+                    <flux:label size="sm">Select Job Position</flux:label>
                     <flux:select wire:model="vacancy_id" required>
-                        <option value="">-- Choose Position --</option>
+                        <option value="" size="sm">-- Choose Position --</option>
                         @foreach ($vacancies as $vacancy)
                             <option value="{{ $vacancy->id }}">{{ $vacancy->position }}</option>
                         @endforeach
@@ -115,7 +106,6 @@
                         </button>
                     </div>
                 @enderror
-
                 {{-- Submit Button --}}
                 <flux:button type="submit" wire:click="submit" wire:loading.attr="disabled" wire:target="submit"
                     variant="primary" color="green" size="sm" class="flex items-center gap-2">
@@ -131,35 +121,44 @@
                     </span>
                     Submit Application
                 </flux:button>
-
-
             </div>
-
             {{-- CV Generator --}}
-            <div class="mt-6 p-4 bg-gray-100 border border-gray-200 rounded-lg">
+            <div class="mt-2 p-4 bg-gray-100 border border-gray-200 rounded-lg">
                 <h3 class="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                    <i class="fas fa-file-pdf text-red-500"></i> Generate CV (Preview)
+                    <i class="fas fa-file-pdf text-red-500"></i> (Preview)
                 </h3>
                 <p class="text-sm text-gray-600">
                     Generate a CV using the information in your profile.
                 </p>
-
-                <button
-                    class="mt-3 text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow flex items-center gap-2">
+                @if($previewUrl)
+                    <iframe src="{{ $previewUrl }}" class="w-full h-[400px] border mt-2 rounded"></iframe>
+                @else
+                    <p class="text-gray-500 mt-2">Generating preview...</p>
+                @endif
+                {{-- <button
+                    class="mt-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow flex items-center gap-2">
                     <i class="fas fa-download"></i> Download CV
-                </button>
+                </button> --}}
             </div>
-
             {{-- Application Status --}}
-            <div class="mt-6">
-                <h3 class="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                    <i class="fas fa-info-circle text-indigo-500"></i> Application Status
-                </h3>
-                <span
-                    class="inline-block mt-2 px-3 py-1 text-sm font-medium bg-yellow-100 text-yellow-700 rounded-full">
-                    Pending Review
-                </span>
-            </div>
-
+            @if($latestApplication)
+                <div class="mt-6">
+                    <h3 class="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="fas fa-info-circle text-indigo-500"></i> Application Status
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                        Your latest application for the position of
+                        <strong>{{ $latestApplication->vacancy->position }}</strong> was submitted on
+                        <strong>{{ $latestApplication->created_at->format('F j, Y') }}</strong>.
+                    </p>
+                    <span class="inline-block mt-2 px-3 py-1 text-sm font-medium rounded-full
+                        @if($latestApplication->status === 'pending') bg-yellow-100 text-yellow-700
+                        @elseif($latestApplication->status === 'shortlisted') bg-green-100 text-green-700
+                        @elseif($latestApplication->status === 'rejected') bg-red-100 text-red-700
+                        @else bg-gray-100 text-gray-700 @endif">
+                        {{ ucfirst($latestApplication->status) }}
+                    </span>
+                </div>
+            @endif
         </div>
     </div>
