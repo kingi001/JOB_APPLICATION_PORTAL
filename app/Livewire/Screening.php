@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire;
+use App\Models\Vacancy;
 
 use Livewire\Component;
 
@@ -52,6 +53,12 @@ class Screening extends Component
     ],
 ];
 
+public $activeVacancy = null;
+
+public function toggleVacancy($id)
+{
+    $this->activeVacancy = $this->activeVacancy === $id ? null : $id;
+}
 public $selectedReports = [];
 public $selectAll = false;
 
@@ -235,6 +242,9 @@ public $availableDocuments = [
             $app['has_all_documents'] = $hasAllDocs;
         }
     }
+
+    public $vacancies;
+    public $editingVacancyId = null;
     public function render()
     {
         return view('livewire.screening');

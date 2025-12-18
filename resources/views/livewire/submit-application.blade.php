@@ -54,6 +54,7 @@
             </p>
             {{-- Application Form --}}
             <div class="mt-3 space-y-4">
+                
                 {{-- Job Selection --}}
                 <div>
                     <flux:label size="sm">Select Job Position</flux:label>

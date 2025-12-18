@@ -13,11 +13,7 @@
                 class="px-2 py-1 font-semibold text-sm focus:outline-none">
                 <i class="fas fa-chart-bar mr-1"></i> Analysis Results
             </button>
-            <button @click="tab = 'bulk'"
-                :class="tab === 'bulk' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500'"
-                class="px-2 py-1 font-semibold text-sm focus:outline-none">
-                <i class="fas fa-tasks mr-1"></i> Bulk Actions
-            </button>
+
             <button @click="tab = 'reports'"
                 :class="tab === 'reports' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500'"
                 class="px-2 py-1 font-semibold text-sm focus:outline-none">
@@ -26,149 +22,238 @@
         </div>
 
         <!-- Tab Content -->
-        <div x-show="tab === 'requirements'" x-cloak>
-            {{-- @include('livewire.tabs.requirements') --}}
-            <div class="bg-white p-6 border rounded-lg shadow-sm space-y-6">
-                <!-- Header -->
-                <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-semibold text-indigo-700 flex items-center gap-2">
-                        <i class="fas fa-clipboard-check text-indigo-600"></i> Minimum Job Requirements
-                    </h3>
-                    <button wire:click="$toggle('editing')"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-sm rounded shadow flex items-center gap-1">
-                        <i class="fas fa-edit text-sm"></i> {{ $editing ? 'Cancel Edit' : 'Edit Requirements' }}
-                    </button>
+        <div x-show="tab == 'requirements' " x-clock>
+            <div x-data="{ tab: 'requirements', editingVacancyId: null }" x-show="tab === 'requirements'" x-cloak
+                class="space-y-6">
+
+                <!-- Page Header -->
+                <div class="flex items-center justify-between">
+                    <h2 class="text-base font-semibold text-indigo-800 flex items-center gap-2">
+                        <i class="fas fa-clipboard-check"></i>
+                        Job Requirements & Screening Rules
+                    </h2>
+                    <p class="text-sm text-gray-500">
+                        Configure minimum qualifications per vacancy
+                    </p>
                 </div>
 
-                <!-- Display Mode -->
-                @if (!$editing)
-                    <div class="text-sm text-gray-700 space-y-3">
-                        <div>
-                            <strong>Minimum Education:</strong> {{ $education ?? 'Not set' }}
-                        </div>
-                        <div>
-                            <strong>Minimum Experience:</strong> {{ $experience ?? 'Not set' }}
-                        </div>
-                        <div>
-                            <strong>Required Documents:</strong>
-                            @if (!empty($documents))
-                                <ul class="list-disc pl-5">
-                                    @foreach ($documents as $doc)
-                                        <li>{{ $doc }}</li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <span class="italic text-gray-500">Not specified</span>
-                            @endif
-                        </div>
-                    </div>
-                @endif
+                @php
+                    $vacancies = [
+                        [
+                            'id' => 1,
+                            'title' => 'Software Developer',
+                            'requirements' => [
+                                'education' => 'Bachelor',
+                                'experience' => 3,
+                                'age' => 21,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Degree Certificate', 'National ID'],
+                                'skills' => 'Laravel, REST APIs, Git'
+                            ]
+                        ],
+                        [
+                            'id' => 2,
+                            'title' => 'Network Administrator',
+                            'requirements' => [
+                                'education' => 'Diploma',
+                                'experience' => 2,
+                                'age' => 25,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Diploma Certificate'],
+                                'skills' => 'Networking, Firewalls, Linux'
+                            ]
+                        ],
+                        [
+                            'id' => 3,
+                            'title' => 'Cybersecurity Analyst',
+                            'requirements' => [
+                                'education' => 'Bachelor',
+                                'experience' => 4,
+                                'age' => 23,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Degree Certificate', 'Security Clearance'],
+                                'skills' => 'SIEM, SOC, Threat Analysis'
+                            ]
+                        ],
+                        [
+                            'id' => 4,
+                            'title' => 'Finance Officer',
+                            'requirements' => [
+                                'education' => 'Bachelor',
+                                'experience' => 4,
+                                'age' => 23,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Degree Certificate', 'Security Clearance'],
+                                'skills' => 'SIEM, SOC, Threat Analysis'
+                            ]
+                        ],
+                        [
+                            'id' => 5,
+                            'title' => 'ICT Officer',
+                            'requirements' => [
+                                'education' => 'Bachelor',
+                                'experience' => 4,
+                                'age' => 23,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Degree Certificate', 'Security Clearance'],
+                                'skills' => 'SIEM, SOC, Threat Analysis'
+                            ]
+                        ],
+                        [
+                            'id' => 6,
+                            'title' => 'Office Assistants',
+                            'requirements' => [
+                                'education' => 'Bachelor',
+                                'experience' => 4,
+                                'age' => 23,
+                                'gender' => 'Any',
+                                'documents' => ['CV', 'Degree Certificate', 'Security Clearance'],
+                                'skills' => 'SIEM, SOC, Threat Analysis'
+                            ]
+                        ],
+                    ];
 
-                <!-- Edit Mode -->
-                @if ($editing)
-                    <form wire:submit.prevent="saveRequirements"
-                        class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                    $availableDocuments = [
+                        'CV',
+                        'National ID',
+                        'Degree Certificate',
+                        'Diploma Certificate',
+                        'Professional Certificate',
+                        'Security Clearance'
+                    ];
+                @endphp
 
-                        <!-- Minimum Education -->
-                        <div>
-                            <label class="font-medium text-gray-800">Minimum Education</label>
-                            <flux:select id="education" wire:model.defer="education" class="mt-1 w-full">
-                                <option value="">-- Select Education Level --</option>
-                                <option value="PhD">PhD</option>
-                                <option value="Master">Master</option>
-                                <option value="Bachelor">Bachelor</option>
-                                <option value="Higher Diploma">Higher Diploma</option>
-                                <option value="Diploma">Diploma</option>
-                                <option value="Certificate">Certificate</option>
-                                <option value="Vocational Training">Vocational Training</option>
-                                <option value="KCSE">KCSE</option>
-                                <option value="KCPE">KCPE</option>
-                            </flux:select>
-                            @error('education') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
+                <!-- Vacancy Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                        <!-- Minimum Experience -->
-                        <div>
-                            <label class="font-medium text-gray-800">Minimum Experience (Years)</label>
-                            <flux:input type="number" min="0" id="experience" wire:model.defer="experience"
-                                class="mt-1 w-full" />
-                            @error('experience') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
+                    @foreach ($vacancies as $vacancy)
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
 
-                        <!-- Minimum Age -->
-                        <div>
-                            <label class="font-medium text-gray-800">Minimum Age</label>
-                            <flux:input type="number" min="18" id="age" wire:model.defer="age" class="mt-1 w-full" />
-                            @error('age') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
+                            <!-- Card Header -->
+                            <div class="flex items-center justify-between px-6 py-4 border-b bg-indigo-50 rounded-t-xl">
+                                <div>
+                                    <h3 class="font-semibold text-indigo-700 text-sm">
+                                        {{ $vacancy['title'] }}
+                                    </h3>
+                                    <p class="text-xs text-gray-500">
+                                        Vacancy ID: {{ $vacancy['id'] }}
+                                    </p>
+                                </div>
 
-                        <!-- Gender Preference -->
-                        <div>
-                            <label class="font-medium text-gray-800">Gender Preference</label>
-                            <flux:select id="gender" wire:model.defer="gender" class="mt-1 w-full">
-                                <option value="">-- Select Gender --</option>
-                                <option value="Any">Any</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </flux:select>
-                            @error('gender') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-
-                        <!-- Certifications -->
-                        <div>
-                            <label class="font-medium text-gray-800">Required Certifications</label>
-                            <flux:input type="text" id="certifications" wire:model.defer="certifications"
-                                placeholder="Comma separated" class="mt-1 w-full" />
-                            @error('certifications') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-
-                        <!-- Languages -->
-                        <div>
-                            <label class="font-medium text-gray-800">Languages Required</label>
-                            <flux:input type="text" id="languages" wire:model.defer="languages"
-                                placeholder="Comma separated" class="mt-1 w-full" />
-                            @error('languages') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-
-                        <!-- Required Documents -->
-                        <div class="md:col-span-3">
-                            <label class="font-medium text-gray-800">Required Documents</label>
-                            <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                                @foreach ($availableDocuments as $doc)
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" wire:model.defer="documents" value="{{ $doc }}"
-                                            class="form-checkbox text-indigo-600 rounded" />
-                                        <span class="text-sm text-gray-700">{{ $doc }}</span>
-                                    </label>
-                                @endforeach
+                                <button @click="editingVacancyId === {{ $vacancy['id'] }}
+                                        ? editingVacancyId = null
+                                        : editingVacancyId = {{ $vacancy['id'] }}"
+                                    class="text-xs px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-1">
+                                    <i class="fas fa-edit"></i>
+                                    <span x-text="editingVacancyId === {{ $vacancy['id'] }} ? 'Cancel' : 'Edit'"></span>
+                                </button>
                             </div>
-                            @error('documents') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+
+                            <!-- VIEW MODE -->
+                            <div x-show="editingVacancyId !== {{ $vacancy['id'] }}"
+                                class="p-6 text-sm space-y-4 text-gray-700">
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span class="font-medium">Education:</span><br>
+                                        {{ $vacancy['requirements']['education'] }}
+                                    </div>
+
+                                    <div>
+                                        <span class="font-medium">Experience:</span><br>
+                                        {{ $vacancy['requirements']['experience'] }} years
+                                    </div>
+
+                                    <div>
+                                        <span class="font-medium">Minimum Age:</span><br>
+                                        {{ $vacancy['requirements']['age'] }}
+                                    </div>
+
+                                    <div>
+                                        <span class="font-medium">Gender:</span><br>
+                                        {{ $vacancy['requirements']['gender'] }}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span class="font-medium">Required Documents:</span>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        @foreach ($vacancy['requirements']['documents'] as $doc)
+                                            <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                                                {{ $doc }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span class="font-medium">Other Skills:</span>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        {{ $vacancy['requirements']['skills'] }}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- EDIT MODE (UI ONLY) -->
+                            <div x-show="editingVacancyId === {{ $vacancy['id'] }}" class="p-6 space-y-5 text-sm">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="font-medium">Minimum Education</label>
+                                        <select class="w-full mt-1 border rounded px-2 py-1">
+                                            <option>PhD</option>
+                                            <option>Master</option>
+                                            <option selected>Bachelor</option>
+                                            <option>Diploma</option>
+                                            <option>Certificate</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="font-medium">Experience (Years)</label>
+                                        <input type="number" class="w-full mt-1 border rounded px-2 py-1" />
+                                    </div>
+                                    <div>
+                                        <label class="font-medium">Minimum Age</label>
+                                        <input type="number" class="w-full mt-1 border rounded px-2 py-1" />
+                                    </div>
+                                    <div>
+                                        <label class="font-medium">Gender Preference</label>
+                                        <select class="w-full mt-1 border rounded px-2 py-1">
+                                            <option>Any</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-medium">Required Documents</label>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                                        @foreach ($availableDocuments as $doc)
+                                            <label class="flex items-center gap-2">
+                                                <input type="checkbox" class="rounded text-indigo-600">
+                                                <span>{{ $doc }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-medium">Other Skills</label>
+                                    <textarea rows="3" class="w-full mt-1 border rounded px-2 py-1"
+                                        placeholder="Optional skills"></textarea>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button
+                                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2">
+                                        <i class="fas fa-save"></i>
+                                        Save & Screen
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- Other Skills -->
-                        <div class="md:col-span-3">
-                            <label class="font-medium text-gray-800">Other Skills / Competencies</label>
-                            <flux:textarea wire:model.defer="skills" rows="3"
-                                placeholder="Optional: List any other skills or competencies" class="mt-1 w-full" />
-                            @error('skills') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="md:col-span-3 flex justify-end">
-                            <button type="submit"
-                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center gap-2">
-                                <i class="fas fa-magnifying-glass text-sm"></i> Screen Analysis
-                            </button>
-
-                        </div>
-                    </form>
-
-                @endif
+                    @endforeach
+                </div>
             </div>
-
-
         </div>
-
         <div x-show="tab === 'analysis'" x-cloak>
             <div
                 class="py-1 mt-2 container mx-auto sm:px-6 lg:px-8 border border-gray-200 rounded-lg shadow-lg bg-white">
@@ -178,7 +263,6 @@
                         {{ __('Screening & Analysis') }}
                     </h2>
                 </div>
-
                 <div class="overflow-x-auto mt-4">
                     <table class="min-w-full bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
                         <thead class="bg-indigo-50 text-indigo-800 uppercase text-xs font-semibold tracking-wider">
@@ -258,66 +342,22 @@
                         class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 ease-in-out">
                         <i class="fas fa-eye text-sm"></i> {{ __('Inspect') }}
                     </button>
-
                     <!-- Bulk Status Update Button -->
                     <button type="button" onclick="handleBulkStatusUpdate()"
                         class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 ease-in-out">
                         <i class="fas fa-check-double text-sm"></i> {{ __('Update Status') }}
                     </button>
-
-
-
                     <!-- Export Report Button -->
                     <button type="button" onclick="handleExportClick()"
                         class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 ease-in-out">
                         <i class="fas fa-file-export text-sm"></i> {{ __('Export Report') }}
                     </button>
-
-
                 </div>
             </div>
-        </div>
-
-        <div x-show="tab === 'bulk'" x-cloak>
-            {{-- @include('livewire.tabs.bulk-actions') --}}
-            <!-- Bulk Analysis Actions -->
-            <div class="bg-white p-4 border rounded-lg shadow-sm space-y-4 mt-6">
-                <h3 class="text-indigo-700 text-lg font-semibold flex items-center gap-2">
-                    <i class="fas fa-bolt text-indigo-600"></i> Bulk Analysis Actions
-                </h3>
-
-                <p class="text-sm text-gray-600">
-                    Perform analysis on multiple applications simultaneously.
-                    This will analyze all applications that haven't been processed yet against the current job
-                    requirements.
-                </p>
-
-                <div class="flex flex-wrap gap-3 mt-3">
-                    <!-- Analyze All Pending -->
-                    <button wire:click="analyzeAllPending"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 text-sm rounded shadow-md flex items-center gap-2 transition-all">
-                        <i class="fas fa-magic"></i> Analyze All Pending
-                    </button>
-
-                    <!-- Re-analyze Selected -->
-                    <button wire:click="reanalyzeSelected"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 text-sm rounded shadow-md flex items-center gap-2 transition-all">
-                        <i class="fas fa-sync-alt"></i> Re-analyze Selected
-                    </button>
-
-                    <!-- Export Analysis Report -->
-                    <button wire:click="exportAnalysisReport"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm rounded shadow-md flex items-center gap-2 transition-all">
-                        <i class="fas fa-file-export"></i> Export Analysis Report
-                    </button>
-                </div>
-            </div>
-
         </div>
         <div x-show="tab === 'reports'" x-cloak>
             {{-- @include(view: 'livewire.tabs.reports') --}}
             <div class="bg-white p-6 border rounded-lg shadow-sm space-y-6">
-
                 <!-- Title -->
                 <div>
                     <h3 class="text-xl font-semibold text-indigo-700 flex items-center gap-2">
@@ -327,7 +367,6 @@
                         Generate comprehensive reports for HR analysis and decision making
                     </p>
                 </div>
-
                 <!-- Bulk Actions -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-3">
@@ -339,7 +378,6 @@
                         <i class="fas fa-cogs"></i> Generate Selected Reports ({{ count($selectedReports) }})
                     </button>
                 </div>
-
                 <!-- Reports Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach($reports as $report)
@@ -363,7 +401,6 @@
                         </div>
                     @endforeach
                 </div>
-
                 <!-- Export Options -->
                 <div class="mt-6">
                     <h4 class="text-md font-semibold text-indigo-700 flex items-center gap-2">
@@ -380,12 +417,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
-
 </div>
