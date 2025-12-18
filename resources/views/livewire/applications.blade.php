@@ -52,61 +52,71 @@
                                 </th>
                                 <th class="text-left px-4 py-3">Name</th>
                                 <th class="text-left px-4 py-3">Email</th>
-                                <th class="text-left px-4 py-3">National ID </th>
+                                <th class="text-left px-4 py-3">Job Applied</th>
                                 <th class="text-left px-4 py-3">County</th>
                                 <th class="text-left px-4 py-3">Gender</th>
                                 <th class="text-left px-4 py-3">PWD</th>
-                                <th class="text-left px-4 py-3">Documents</th>
+                                {{-- <th class="text-left px-4 py-3">Documents</th> --}}
                                 <th class="text-left px-4 py-3">Submitted</th>
                                 <th class="text-left px-4 py-3">Status</th>
                             </tr>
                         </thead>
+
                         <tbody class="text-gray-700 text-sm divide-y divide-gray-200">
                             @foreach ($applications as $index => $app)
+                                @php
+                                    $user = $app->user;
+                                    $submittedDocs = $user->documents ?? []; // Assuming relation or array
+                                    $requiredDocs = ['cv.pdf', 'id.pdf', 'certificate.pdf'];
+                                    $hasAllDocuments = count(array_intersect($requiredDocs, $submittedDocs)) === count($requiredDocs);
+                                @endphp
                                 <tr>
                                     <td class="px-4 py-2 whitespace-nowrap">{{ $index + 1 }}</td>
+
                                     <td class="px-4 py-2 text-gray-800 whitespace-nowrap">
-                                        <input type="checkbox" wire:model="selectedIds" name="education_ids[]"
-                                            class="education-checkbox form-checkbox rounded-sm h-3 w-3 text-indigo-600">
+                                        <input type="checkbox" wire:model="selectedIds" name="application_ids[]"
+                                            class="form-checkbox rounded-sm h-3 w-3 text-indigo-600">
                                     </td>
-                                    <td class="px-4 py-2">{{ $app['name'] }}</td>
-                                    <td class="px-4 py-2">{{ $app['email'] }}</td>
-                                    <td class="text-left px-4 py-3">{{ $app['nationalid'] }}</td>
-                                    <td class="px-4 py-2">{{ $app['county'] }}</td>
-                                    <td class="px-4 py-2">{{ $app['gender'] }}</td>
+
+                                    <td class="px-4 py-2">{{ $user->name }}</td>
+                                    <td class="px-4 py-2">{{ $user->email }}</td>
+                                    <td class="px-4 py-2">{{ $app->vacancy->position }}</td>
+                                    <td class="px-4 py-2">{{ $user->county ?? '-' }}</td>
+                                    <td class="px-4 py-2">{{ $user->gender ?? '-' }}</td>
+
                                     <td class="px-4 py-2">
                                         <span
-                                            class="text-xs px-2 py-1 rounded-full {{ $app['pwd'] ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600' }}">
-                                            {{ $app['pwd'] ? 'Yes' : 'No' }}
+                                            class="text-xs px-2 py-1 rounded-full {{ $user->pwd ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600' }}">
+                                            {{ $user->pwd ? 'Yes' : 'No' }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-2">
-                                        @php
-                                            $requiredDocs = ['cv.pdf', 'id.pdf', 'certificate.pdf'];
-                                            $submittedDocs = $app['documents'];
-                                            $hasAllDocuments = count(array_intersect($requiredDocs, $submittedDocs)) === count($requiredDocs);
-                                        @endphp
 
+                                    {{-- <td class="px-4 py-2">
                                         @if ($hasAllDocuments)
                                             <i class="fas fa-circle-check text-green-600 text-lg"
                                                 title="All documents submitted"></i>
                                         @else
                                             <i class="fas fa-circle-xmark text-red-500 text-lg" title="Incomplete documents"></i>
                                         @endif
+                                    </td> --}}
+
+                                    <td class="px-4 py-2">
+                                        <i class="fas fa-calendar-days text-indigo-500"></i>
+                                        {{ $app->created_at->format('d M Y') }}
                                     </td>
-                                    <td class="px-4 py-2"><i class="fas fa-calendar-days text-indigo-500"></i>
-                                        {{ \Carbon\Carbon::parse($app['date_submitted'])->format('d M Y') }}</td>
+
                                     <td class="px-4 py-2">
                                         <span
                                             class="text-xs px-2 py-1 rounded-full font-semibold
-                                                                        {{ $app['status'] === 'Complete' ? 'bg-green-200 text-green-900' : 'bg-yellow-200 text-yellow-900' }}">
-                                            {{ $app['status'] }}
+                                {{ $app->status === 'Complete' ? 'bg-green-200 text-green-900' : 'bg-yellow-200 text-yellow-900' }}">
+                                            {{ ucfirst($app->status) }}
                                         </span>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             @endif
 

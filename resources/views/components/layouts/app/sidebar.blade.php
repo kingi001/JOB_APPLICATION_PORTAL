@@ -113,7 +113,7 @@
                 </flux:navlist.item>
 
                 {{-- 📨 Application --}}
-                <flux:navlist.item wire:navigate
+                <flux:navlist.item :href="route('submit-application')" :current="request()->routeIs('submit-application')" wire:navigate
                     class="transition-all duration-200 hover:bg-indigo-50 flex items-center gap-3 px-3 py-2 rounded-md">
                     <i class="fas fa-paper-plane text-primary text-sm"></i>
                     <span>{{ __('Submit Application') }}</span>

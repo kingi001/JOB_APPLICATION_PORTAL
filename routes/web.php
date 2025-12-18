@@ -12,8 +12,10 @@ use App\Livewire\Screening;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\SubmitApplication;
 use App\Livewire\Vacancy\Vacancy;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -36,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Membership', Membership::class)->name('membership');
     Route::get('Referees', Referee::class)->name('referee');
     Route::get('DocumentsUpload', Docupload::class)->name('documents-upload');
+    Route::get('SubmitApplication', SubmitApplication::class)->name('submit-application');
     Route::redirect('settings', 'settings/profile');
     // Settings routes
     Route::get('settings/profile', Profile::class)->name('settings.profile');

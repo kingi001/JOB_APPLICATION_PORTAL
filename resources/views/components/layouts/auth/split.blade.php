@@ -23,8 +23,17 @@
             <!-- Branding -->
             <a href="{{ route('home') }}" class="relative z-20 flex items-center gap-3 text-lg font-semibold">
                 <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" />
-                <span class="text-white text-xl font-bold">BMA Jobs Portal</span>
+                <span class="text-white text-xl font-bold">BMA Job Application Portal</span>
             </a>
+        </div>
+
+        <div class="absolute bottom-6 left-6 z-20 max-w-md">
+            <p class="text-white text-sm leading-relaxed">
+                “A World Class Centre for Maritime Education and Training.”
+            </p>
+            <p class="mt-2 text-xs text-neutral-200">
+                © {{ date('Y') }} Bandari Maritime Academy
+            </p>
         </div>
         <!-- Right Panel: Login / Form -->
         <div class="w-full lg:p-8 flex items-center justify-center">
@@ -39,7 +48,7 @@
             </div>
         </div>
     </div>
-
     @fluxScripts
 </body>
+
 </html>
