@@ -23,7 +23,7 @@
             <!-- Branding -->
             <a href="{{ route('home') }}" class="relative z-20 flex items-center gap-3 text-lg font-semibold">
                 <img src="{{ asset('images/logo-main.png') }}" alt="BMA Logo" />
-                <span class="text-white text-xl font-bold">BMA Job Application Portal</span>
+                <span class="text-white text-xl font-bold">BMA Job Portal</span>
             </a>
         </div>
 

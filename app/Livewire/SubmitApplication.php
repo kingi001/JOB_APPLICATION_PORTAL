@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Livewire;
-
-use \PDF;
 use App\Models\Application;
 use App\Models\Education;
 use App\Models\Employment;
@@ -15,7 +12,6 @@ use Barryvdh\DomPDF\Facade\Pdf as PDFMAIN;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
 class SubmitApplication extends Component
 {
     public $vacancy_id;
