@@ -28,7 +28,7 @@ Route::get('/dashboard', [ApplicantDashboardController::class, 'index'])
 
 Route::middleware(['auth'])->group(function () {
     //notes routes
-    Route::get('PersonalInformation', PersonalInformation::class)->name('personal-information');
+    Route::get('PersonalInformation', action: PersonalInformation::class)->name('personal-information');
     Route::get('Vacancies', Vacancy::class)->name('vacancies');
     Route::get('AcademicQualification', Academic::class)->name('education');
     Route::get('ProfessionalQualification', Professional::class)->name('professional-qualification');
